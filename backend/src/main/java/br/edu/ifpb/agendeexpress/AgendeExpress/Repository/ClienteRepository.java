@@ -8,4 +8,7 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
+	Cliente findByEmail(String email);
+	Cliente findByUsuario(String usuario);
+	
 }
