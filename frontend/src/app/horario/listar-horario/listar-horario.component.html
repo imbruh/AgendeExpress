@@ -1,0 +1,22 @@
+<div class="menu">
+    <div class="nome-empresa">
+        <h3>Nome da Empresa</h3>
+    </div>
+     
+    <button mat-button [matMenuTriggerFor]="menu" style="margin-right: 30px;">   
+        <div class="menu-button">
+            <mat-icon class="menu-icone">person</mat-icon>
+        </div>
+    </button>
+
+    <mat-menu #menu="matMenu" class="menu-itens">
+        <div>
+            <button mat-menu-item >Editar perfil</button>
+            <button mat-menu-item>Sair</button>
+        </div>
+        
+    </mat-menu>
+  
+</div>
+
+<div class="teste" id="inicio"></div>

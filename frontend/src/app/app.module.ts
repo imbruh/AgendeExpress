@@ -3,14 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HorarioModule } from './horario/horario.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,    
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HorarioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
