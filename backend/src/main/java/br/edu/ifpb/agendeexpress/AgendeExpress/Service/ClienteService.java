@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.ClienteAtualizarDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.ClienteCadastrarDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Cliente;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Model.ClienteEmpresa;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Empresa;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.ClienteEmpresaRepository;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.ClienteRepository;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.EmpresaRepository;
 
@@ -20,6 +22,9 @@ public class ClienteService {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 
+	@Autowired
+	private ClienteEmpresaRepository clienteEmpresaRepository;
+	
 	public Boolean cadastrar(ClienteCadastrarDTO dto) {
 		Cliente clienteEmailExistente = clienteRepository.findByEmail(dto.getEmail());
 
@@ -32,21 +37,25 @@ public class ClienteService {
 			return false;
 		}
 		
-		Empresa empresaExistente = empresaRepository.getById(dto.getIdEmpresa());
-		
-		if (empresaExistente == null) {
-			return false;
-		}
-		
-		clienteRepository.save(Cliente.builder()
+		Cliente cliente = clienteRepository.save(Cliente.builder()
 				.email(dto.getEmail())
 				.nome(dto.getNome())
 				.usuario(dto.getUsuario())
 				.senha(dto.getSenha())
 				.telefone(dto.getTelefone())
-				.empresa(empresaExistente)
 				.build());
 		
+		for (Long id : dto.getIdEmpresa()) {
+			Empresa empresa = empresaRepository.getById(id);
+			if (empresa == null) {
+				return false;
+			}
+			ClienteEmpresa clienteEmpresa = ClienteEmpresa.builder()
+					.cliente(cliente)
+					.empresa(empresa)
+					.build();
+			this.clienteEmpresaRepository.save(clienteEmpresa);
+		}
 		
 		return true;
 	}

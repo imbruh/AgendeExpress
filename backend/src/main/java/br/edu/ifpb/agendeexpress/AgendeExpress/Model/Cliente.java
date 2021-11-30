@@ -44,9 +44,5 @@ public class Cliente {
 	
 	@Column(length = 11)
 	private String telefone;
-	
-	@ManyToOne
-	@JoinColumn(name = "empresa_id")
-	@NotNull
-	private Empresa empresa;
+
 }

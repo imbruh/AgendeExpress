@@ -1,5 +1,7 @@
 package br.edu.ifpb.agendeexpress.AgendeExpress.DTO;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +29,6 @@ public class ClienteCadastrarDTO {
 	private String telefone;
 	
 	@NotNull
-	private Long idEmpresa;
+	private List<Long> idEmpresa;
 	
 }

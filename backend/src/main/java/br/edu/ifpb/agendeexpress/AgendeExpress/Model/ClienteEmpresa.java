@@ -1,12 +1,11 @@
 package br.edu.ifpb.agendeexpress.AgendeExpress.Model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CNPJ;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,21 +17,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Empresa {
+public class ClienteEmpresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "O nome da empresa não pode ser nulo")
-	@Column(unique = true)
-	private String nome;
+	@ManyToOne
+	@NotNull
+	private Cliente cliente;
 	
-	@NotBlank(message = "O cnpj da empresa não pode ser nulo")
-	@Column(unique = true)
-	@CNPJ
-	private String cnpj;
-	
-	@NotBlank(message = "A senha não pode ser nula")
-	private String senha;
+	@ManyToOne
+	@NotNull
+	private Empresa empresa;
 }
