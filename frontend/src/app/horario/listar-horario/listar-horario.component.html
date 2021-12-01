@@ -1,8 +1,8 @@
-<div class="menu">
+ <div class="menu">
     <div class="nome-empresa">
         <h3>Nome da Empresa</h3>
     </div>
-     
+    
     <button mat-button [matMenuTriggerFor]="menu" style="margin-right: 30px;">   
         <div class="menu-button">
             <mat-icon class="menu-icone">person</mat-icon>
@@ -16,7 +16,40 @@
         </div>
         
     </mat-menu>
-  
 </div>
 
-<div class="teste" id="inicio"></div>
+<div class="calendario-data">
+    <div class="calendario-label">
+        <i class="fas fa-calendar-alt"></i>
+        <p>01 de Dezembro, 2021</p>
+    </div>
+
+    <mat-form-field appearance="fill" style="margin-top: 2%; margin-right: 4%;">
+        <mat-label>Escolha uma data</mat-label>
+        <input matInput [matDatepicker]="picker" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+</div>
+
+<div class="btn-acoes">
+    <button mat-raised-button style="background-color: #a1c0a1;"><i class="fas fa-plus-circle" style="margin-right: 4%;"></i>Cadastrar horário</button>
+    <button mat-raised-button style="background-color: #dfd0af; margin-left: 2%;"><i class="fas fa-times-circle" style="margin-right: 4%;"></i>Cancelar horário</button>
+</div>
+
+<div class="cards-agendamentos">
+    <mat-card *ngFor="let h of horarios;" style="background-color: #a45785">
+        <mat-card-subtitle style="color: white;">{{h.data}}</mat-card-subtitle>
+        <mat-card-title style="color: white;">{{h.hora}}</mat-card-title>     
+    </mat-card>
+</div>
+
+<div class="example-button-container">
+    <button mat-mini-fab style="background-color: #85586c;">
+        <i class="fas fa-comment" style="color: white;"></i>
+    </button>
+</div>
+
+<div class="footer">
+    <p style="display: flex; align-items: center; height: 3%; margin-left: 1%;">© 2021 por AgendeExpress.</p>
+</div>
