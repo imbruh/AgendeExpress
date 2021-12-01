@@ -1,28 +1,55 @@
-<form>
-  <h1 style="text-align: center; font-size: 30px; margin-top: 20px">Cadastro Clientes</h1>
-  <div class="row" style="margin-top: 20px; margin-left: 20px; margin-right: 20px">
-    <div class="form-group col-md-6">
-      <label for="nome">Nome</label>
-      <input name="nome" class="form-control" id="nome"  placeholder="Nome">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="cpnj">CNPJ</label>
-      <input name="cpnj" class="form-control" id="cpnj"  placeholder="CNPJ">
-    </div>
-  </div>
-  <div class="row" style="margin-left: 20px; margin-right: 20px; align-items: center">
-    <div class="form-group col-md-4">
-      <label for="password">Senha</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-    </div>
-    <div style="margin-top: 20px; text-align: center">
-      <button type="button" class="btn btn-primary">Cadastrar
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
-          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-          <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-        </svg>
-      </button>
-    </div>
+<div class="form-body">
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <h3>Cadastro Empresas</h3>
+          <p>Preencha os campos abaixo.</p>
+          <form class="requires-validation" novalidate>
 
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="name" placeholder="Nome" required>
+              <div class="valid-feedback">Nome válido</div>
+              <div class="invalid-feedback"> O campo não pode ficar em branco!</div>
+            </div>
+
+            <div class="col-md-12">
+              <input class="form-control" type="email" name="email" placeholder="CNPJ" required>
+              <div class="valid-feedback">CNPJ válido</div>
+              <div class="invalid-feedback">CNPJ o campo não pode ficar em branco!</div>
+            </div>
+
+            <div class="col-md-12">
+              <input class="form-control" type="password" name="password" placeholder="Password" required>
+              <div class="valid-feedback">Password válido</div>
+              <div class="invalid-feedback">Password o campo não pode ficar em branco!</div>
+            </div>
+            <div class="form-button mt-3" style="text-align: center">
+              <button id="submit" type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-</form>
+</div>
+
+<script>
+
+  (function () {
+    'use strict'
+    const forms = document.querySelectorAll('.requires-validation')
+    Array.from(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+</script>

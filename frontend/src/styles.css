@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
-@import '~bootstrap/dist/css/bootstrap.min.css';
 
-=======
+@import '~bootstrap/dist/css/bootstrap.min.css';
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
->>>>>>> 4f4f036cc14a2fa3dfc16687ac04e3727b1f9ba3
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

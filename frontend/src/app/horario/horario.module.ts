@@ -12,20 +12,23 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [
-    ListarHorarioComponent,
-    CadastrarHorarioComponent
-  ],
-  imports: [
-    CommonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatNativeDateModule
-  ]
+    declarations: [
+        ListarHorarioComponent,
+        CadastrarHorarioComponent
+    ],
+    exports: [
+        ListarHorarioComponent
+    ],
+    imports: [
+        CommonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatNativeDateModule
+    ]
 })
 export class HorarioModule { }
