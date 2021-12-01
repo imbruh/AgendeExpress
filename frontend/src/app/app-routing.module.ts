@@ -6,8 +6,8 @@ import {CadastroEmpresaComponent} from "./cadastro/cadastro-empresa/cadastro-emp
 
 const routes: Routes = [
   {
-    path: 'telaInicial',
-    component: ListarHorarioComponent,
+    path: '',
+    component: ListarHorarioComponent
   },
   {
     path: 'cadastro-cliente',

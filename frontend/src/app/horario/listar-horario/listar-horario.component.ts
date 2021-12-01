@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { DialogBatePapoComponent } from '../dialog-bate-papo/dialog-bate-papo.component';
 
 @Component({
   selector: 'app-listar-horario',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarHorarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog, private dialogService: DialogService, public dialogRef: MatDialogRef<DialogService>) {}
+
+  openDialog() {
+    this.dialogService.openDialogMensagens();
+  }
 
   ngOnInit(): void {
   }

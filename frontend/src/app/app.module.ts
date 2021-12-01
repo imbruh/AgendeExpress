@@ -8,6 +8,7 @@ import { CadastroClienteComponent } from './cadastro/cadastro-cliente/cadastro-c
 import { CadastroEmpresaComponent } from './cadastro/cadastro-empresa/cadastro-empresa.component';
 import {CadastroModule} from "./cadastro/cadastro.module";
 
+
 @NgModule({
   declarations: [
     AppComponent,
