@@ -8,8 +8,8 @@ import {ListagemEmpresaComponent} from "./cadastro/listagem-empresa/listagem-emp
 
 const routes: Routes = [
   {
-    path: 'telaInicial',
-    component: ListarHorarioComponent,
+    path: '',
+    component: ListarHorarioComponent
   },
   {
     path: 'cadastro-cliente',

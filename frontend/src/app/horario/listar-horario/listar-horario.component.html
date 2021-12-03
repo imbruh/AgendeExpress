@@ -38,15 +38,15 @@
 </div>
 
 <div class="cards-agendamentos">
-    <mat-card *ngFor="let h of horarios;" style="background-color: #a45785">
+    <mat-card *ngFor="let h of horarios;" style="background-color: #a45785;">
         <mat-card-subtitle style="color: white;">{{h.data}}</mat-card-subtitle>
         <mat-card-title style="color: white;">{{h.hora}}</mat-card-title>     
     </mat-card>
 </div>
 
 <div class="example-button-container">
-    <button mat-mini-fab style="background-color: #85586c;">
-        <i class="fas fa-comment" style="color: white;"></i>
+    <button mat-mini-fab style="background-color: #85586c;" (click)="openDialog()">
+        <i class="fas fa-comment" style="color: white; font-size: 18px;"></i>
     </button>
 </div>
 
