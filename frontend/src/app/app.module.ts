@@ -7,6 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { CadastroClienteComponent } from './cadastro/cadastro-cliente/cadastro-cliente.component';
 import { CadastroEmpresaComponent } from './cadastro/cadastro-empresa/cadastro-empresa.component';
 import {CadastroModule} from "./cadastro/cadastro.module";
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -19,7 +23,10 @@ import {CadastroModule} from "./cadastro/cadastro.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     HorarioModule,
-    CadastroModule
+    CadastroModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,24 +8,24 @@
           <form class="requires-validation" novalidate>
 
             <div class="col-md-12">
-              <input class="form-control" type="text" name="name" placeholder="Nome" required>
+              <input [(ngModel)]="empresa.nome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" name="name" placeholder="Nome" required>
               <div class="valid-feedback">Nome válido</div>
               <div class="invalid-feedback"> O campo não pode ficar em branco!</div>
             </div>
 
             <div class="col-md-12">
-              <input class="form-control" type="email" name="email" placeholder="CNPJ" required>
+              <input [(ngModel)]="empresa.cnpj" [ngModelOptions]="{standalone: true}" class="form-control" type="email" name="email" placeholder="CNPJ" required>
               <div class="valid-feedback">CNPJ válido</div>
               <div class="invalid-feedback">CNPJ o campo não pode ficar em branco!</div>
             </div>
 
             <div class="col-md-12">
-              <input class="form-control" type="password" name="password" placeholder="Password" required>
+              <input [(ngModel)]="empresa.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="password" placeholder="Password" required>
               <div class="valid-feedback">Password válido</div>
               <div class="invalid-feedback">Password o campo não pode ficar em branco!</div>
             </div>
             <div class="form-button mt-3" style="text-align: center">
-              <button id="submit" type="submit" class="btn btn-primary">Cadastrar</button>
+              <button id="submit" type="submit" class="btn btn-primary" (click)="cadastrarEmpresa()">Cadastrar</button>
             </div>
           </form>
         </div>
