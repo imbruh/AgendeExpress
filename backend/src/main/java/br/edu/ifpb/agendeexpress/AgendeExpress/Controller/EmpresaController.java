@@ -1,10 +1,13 @@
 package br.edu.ifpb.agendeexpress.AgendeExpress.Controller;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.EmpresaAtualizarDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Empresa;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.EmpresaRepository;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Service.EmpresaService;
 
 @RestController
@@ -22,6 +26,14 @@ public class EmpresaController {
 
 	@Autowired
 	private EmpresaService empresaService;
+	
+	@Autowired
+	private EmpresaRepository empresaRepository;
+	
+	@GetMapping("/listar")
+	public List<Empresa> getEmpresas() {
+		return this.empresaRepository.findAll();
+	}
 	
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Boolean> cadastrar(@RequestBody Empresa empresa){

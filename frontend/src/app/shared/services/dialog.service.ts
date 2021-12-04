@@ -12,7 +12,7 @@ export class DialogService {
 
   openDialogMensagens(): void {
     this.dialog.open(DialogBatePapoComponent, {
-      width: '30%', height: '48%',
+      width: '30%'
     });
   }
 
