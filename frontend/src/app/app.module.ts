@@ -8,13 +8,15 @@ import {CadastroModule} from "./cadastro/cadastro.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ChatComponent } from './chat/chat.component';
 
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
-  ],
+    ChatComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
