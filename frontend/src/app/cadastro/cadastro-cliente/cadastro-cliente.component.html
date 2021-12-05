@@ -9,32 +9,31 @@
 
             <div class="col-md-12">
               <input  [(ngModel)]="cliente.nome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" name="name" placeholder="Nome" required>
-              <div class="valid-feedback">Nome válido</div>
-              <div class="invalid-feedback"> O campo não pode ficar em branco!</div>
+              <div class="valid-feedback">Nome</div>
+              <div class="invalid-feedback"> O campo não pode ficar em branco</div>
             </div>
 
             <div class="col-md-12">
-              <input class="form-control" type="email" name="email" placeholder="E-mail " required>
-              <div [(ngModel)]="cliente.email" class="valid-feedback">Email válido</div>
-              <div class="invalid-feedback">Email o campo não pode ficar em branco!</div>
+              <input [(ngModel)]="cliente.email" class="form-control" type="text" name="email" placeholder="E-mail " required>
+              <div class="valid-feedback">Email válido</div>
+              <div class="invalid-feedback">Email o campo não pode ficar em branco</div>
             </div>
             <div class="col-md-12" style="margin-top: 15px">
-              <input [(ngModel)]="cliente.telefone" class="form-control" type="fone" name="fone" placeholder="Telefone" required>
-              <div class="valid-feedback">Telefone válido</div>
-              <div class="invalid-feedback">Telefone o campo não pode ficar em branco!</div>
+              <input [(ngModel)]="cliente.telefone" class="form-control" type="fone" name="fone" placeholder="Telefone">
+              <div class="valid-feedback">Telefone</div>
             </div>
 
             <div class="col-md-12">
-            <input [(ngModel)]="cliente.usuario" class="form-control" type="email" name="email" placeholder="Usuário" required>
-            <div class="valid-feedback">Usuário válido</div>
-            <div class="invalid-feedback">Usuário! Ocampo não pode ficar em branco!</div>
+            <input [(ngModel)]="cliente.usuario" class="form-control" type="text" name="usuario" placeholder="Nome de usuário" required>
+            <div class="valid-feedback">Usuário</div>
+            <div class="invalid-feedback">Usuário! O campo não pode ficar em branco</div>
           </div>
 
 
             <div class="col-md-12">
-              <input [(ngModel)]="cliente.senha" class="form-control" type="password" name="password" placeholder="Password" required>
-              <div class="valid-feedback">Password válido</div>
-              <div class="invalid-feedback">Password o campo não pode ficar em branco!</div>
+              <input [(ngModel)]="cliente.senha" class="form-control" type="password" name="password" placeholder="Senha" required>
+              <div class="valid-feedback">Senha</div>
+              <div class="invalid-feedback">A senha não pode ficar em branco</div>
             </div>
             <div class="form-button mt-3" style="text-align: center;">
               <button id="submit" type="submit" class="btn btn-primary" (click)="cadastrarCliente()">Cadastrar</button>

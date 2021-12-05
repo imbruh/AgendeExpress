@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,7 @@ import br.edu.ifpb.agendeexpress.AgendeExpress.Service.ClienteService;
 
 @RestController
 @RequestMapping(value = "/cliente")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
 	@Autowired

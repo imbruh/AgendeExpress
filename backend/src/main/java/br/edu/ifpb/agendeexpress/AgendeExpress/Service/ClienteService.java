@@ -2,6 +2,7 @@ package br.edu.ifpb.agendeexpress.AgendeExpress.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,13 +57,13 @@ public class ClienteService {
 				.build());
 		
 		for (Long id : dto.getIdEmpresa()) {
-			Empresa empresa = empresaRepository.getById(id);
+			Optional<Empresa> empresa = empresaRepository.findById(id);
 			if (empresa == null) {
 				return false;
 			}
 			ClienteEmpresa clienteEmpresa = ClienteEmpresa.builder()
 					.cliente(cliente)
-					.empresa(empresa)
+					.empresa(empresa.get())
 					.build();
 			this.clienteEmpresaRepository.save(clienteEmpresa);
 		}

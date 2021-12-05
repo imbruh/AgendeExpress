@@ -24,19 +24,19 @@ public class HorarioService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	public String cadastrar(HorarioCadastrarDTO horario) {
+	public void cadastrar(HorarioCadastrarDTO horario) {
 		Horario horarioExistente = horarioRepository.findByDatahora(horario.getDataHora());
 		Optional<Cliente> cliente = clienteRepository.findById(horario.getIdCliente());
-		if (horarioExistente != null) {
-			return null;
-		}
+//		if (horarioExistente != null) {
+//			return null;
+//		}
 		
 		horarioRepository.save(Horario.builder()
 				.datahora(horario.getDataHora())
 				.cliente(cliente.get())
 				.build());
 		
-		return "Horário marcado com sucesso";
+//		return "Horário marcado com sucesso";
 		
 	}
 	

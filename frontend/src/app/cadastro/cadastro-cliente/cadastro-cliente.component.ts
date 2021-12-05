@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Cliente} from "../../shared/model/cliente";
 import {ClienteService} from "../../shared/services/cliente.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import { ClienteCadastrarDTO } from 'src/app/shared/model/clienteCadastrarDTO';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -9,50 +10,42 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./cadastro-cliente.component.css']
 })
 export class CadastroClienteComponent implements OnInit {
-  cliente: Cliente;
-  clientes: Array<Cliente>;
+  cliente: ClienteCadastrarDTO;
+  clientes: Array<ClienteCadastrarDTO>;
 
   constructor(private clienteService: ClienteService,private rotaAtual: ActivatedRoute, private roteador: Router) {
-    this.cliente = new Cliente();
-    this.clientes = new Array<Cliente>();
-    if (this.rotaAtual.snapshot.paramMap.has('id')) {
-      const idParaEdicao = Number(this.rotaAtual.snapshot.paramMap.get('id'));
-      this.clienteService.pesquisarPorID(idParaEdicao).subscribe(
-        clienteRetornado => this.cliente = clienteRetornado
-      );
-
-    }
+    this.cliente = new ClienteCadastrarDTO();
+    this.clientes = new Array<ClienteCadastrarDTO>();
+    // if (this.rotaAtual.snapshot.paramMap.has('id')) {
+    //   const idParaEdicao = Number(this.rotaAtual.snapshot.paramMap.get('id'));
+    //   this.clienteService.pesquisarPorID(idParaEdicao).subscribe(
+    //     clienteRetornado => this.cliente = clienteRetornado
+    //   );
+    // }
   }
-
 
   ngOnInit(): void {
-    this.listar()
+    
   }
-  listar() {
-    this.clienteService.listar().subscribe(
-      clientes => {
-        this.clientes = clientes;
-      }
-    )
-  }
+  
   cadastrarCliente (): void{
-    if (this.cliente.id) {
-      this.clienteService.atualizar(this.cliente).subscribe(
-        alunoAlterado => {
-          console.log(alunoAlterado);
-          this.roteador.navigate(['listagem-aluno']);
-        }
-      )
-    }else {
-      this.clienteService.cadastrarCliente(this.cliente).subscribe(
-        clienteCadastrado =>  {
-          console.log(clienteCadastrado)
-          this.roteador.navigate(['listagem-cliente'])
-        }
-      );
+    // if (this.cliente.id) {
+    //   this.clienteService.atualizar(this.cliente).subscribe(
+    //     alunoAlterado => {
+    //       console.log(alunoAlterado);
+    //       this.roteador.navigate(['listagem-aluno']);
+    //     }
+    //   )
+    // }else {
+    console.log(this.cliente)
+    this.clienteService.cadastrarCliente(this.cliente).subscribe(
+      clienteCadastrado =>  {
+        console.log(clienteCadastrado)
+        this.roteador.navigate([''])
+      }
+    );
 
-      this.cliente = new Cliente();
-    }
-
+    this.cliente = new ClienteCadastrarDTO();
   }
+
 }

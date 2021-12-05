@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from 'src/app/shared/services/horario.service';
 import { HorarioCadastrarDTO } from 'src/app/shared/model/horarioCadastrarDTO';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-horario',
@@ -13,7 +14,7 @@ export class CadastrarHorarioComponent implements OnInit {
   data = new Date();
   hora = '';
 
-  constructor(private horarioService: HorarioService) { }
+  constructor(private horarioService: HorarioService, private roteador: Router) { }
 
   ngOnInit() {
     this.listarHorariosDisponiveis();
@@ -47,8 +48,10 @@ export class CadastrarHorarioComponent implements OnInit {
     horarioDTO.idCliente = 1;
 
     this.horarioService.cadastrarHorario(horarioDTO).subscribe(
-      () => {}
+      horario => {
+        // this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(new Date))
+        location.reload()
+      }
     );
   }
-
 }

@@ -40,7 +40,7 @@ constructor(private httpClient: HttpClient) { }
     return this.httpClient.get<string[]>(`${this.URL_HORARIO}/filtrar-horario?data=${data}`);
   }
 
-  cadastrarHorario(horarioCadastrarDTO: HorarioCadastrarDTO): Observable<String>{
-    return this.httpClient.post<String>(`${this.URL_HORARIO}/cadastrar`, horarioCadastrarDTO);
+  cadastrarHorario(horarioCadastrarDTO: HorarioCadastrarDTO): Observable<void>{
+    return this.httpClient.post<void>(`${this.URL_HORARIO}/cadastrar`, horarioCadastrarDTO);
   }
 }

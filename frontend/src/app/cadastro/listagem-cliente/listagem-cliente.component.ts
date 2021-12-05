@@ -17,9 +17,6 @@ export class ListagemClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clienteService.listar().subscribe(
-      dados => this.cliente =  dados
-    );
   }
 /*
   filtrar(value: string): void {

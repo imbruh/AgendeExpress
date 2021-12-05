@@ -25,7 +25,13 @@ export class ListarHorarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listarHorariosPorDia();
+    // this.listarHorariosPorDia();
+    this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje)).subscribe(
+      horario => {
+        this.horarios = horario;
+        console.log('a')
+      }
+    )
   }
 
   listarHorariosPorDia() {
