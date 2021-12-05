@@ -16,5 +16,4 @@ public interface HorarioRepository extends JpaRepository<Horario, Long>{
 	
 	@Query(value="SELECT * FROM Horario WHERE EXTRACT(year FROM dataHora) = EXTRACT(year FROM ?1) and EXTRACT(month FROM dataHora) = EXTRACT(month FROM ?1) and EXTRACT(day FROM dataHora) = EXTRACT(day FROM ?1)",nativeQuery = true)
 	List<Horario> listarPorDia(LocalDateTime dia);
-	
 }

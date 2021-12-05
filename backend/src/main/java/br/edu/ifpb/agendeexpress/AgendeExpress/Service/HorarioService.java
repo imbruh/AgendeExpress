@@ -58,5 +58,23 @@ public class HorarioService {
 		return horariosDTO;
 
 	}
+
+	public List<String> filtrar(LocalDateTime data) {
+		List<Horario> horarios = this.horarioRepository.listarPorDia(data);
+		
+		List<String> horariosMarcados = new ArrayList<>();
+		for(Horario h: horarios){
+			horariosMarcados.add(Integer.toString(h.getDatahora().getHour()));
+		}
+		
+		List<String> horas = new ArrayList<>();
+		for(int i = 8; i < 18; i++) {
+			if(!horariosMarcados.contains(Integer.toString(i))){
+				horas.add(Integer.toString(i));
+			}
+		}
+		
+		return horas;
+	}
 	
 }

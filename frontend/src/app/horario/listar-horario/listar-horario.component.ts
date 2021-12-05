@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { HorarioDTO } from 'src/app/shared/model/horarioDTO';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { DialogBatePapoComponent } from '../dialog-bate-papo/dialog-bate-papo.component';
+import { HorarioService } from 'src/app/shared/services/horario.service';
 
 @Component({
   selector: 'app-listar-horario',
@@ -10,64 +11,81 @@ import { DialogBatePapoComponent } from '../dialog-bate-papo/dialog-bate-papo.co
 })
 export class ListarHorarioComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private dialogService: DialogService, public dialogRef: MatDialogRef<DialogService>) {}
+  hoje = new Date();
+  horarios: Array<HorarioDTO> = [];
 
-  openDialog() {
+  constructor(public dialog: MatDialog, private dialogService: DialogService, private horarioService: HorarioService, public dialogRef: MatDialogRef<DialogService>) {}
+
+  openDialogMensagem() {
     this.dialogService.openDialogMensagens();
   }
 
-  ngOnInit(): void {
+  openDialogCadastroHorario() {
+    this.dialogService.openDialogCadastrarHorario();
   }
 
-  public horarios = [
-    {
-      "data": "Qua 01/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qua 01/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qua 01/12/2021",
-      "hora": "09:00h"
-    },
-    {
-      "data": "Qua 01/12/2021",
-      "hora": "10:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    },
-    {
-      "data": "Qui 02/12/2021",
-      "hora": "08:00h"
-    }
+  ngOnInit(): void {
+    this.listarHorariosPorDia();
+  }
+
+  listarHorariosPorDia() {
+    this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje)).subscribe(
+      horario => {
+        console.log(horario);
+        this.horarios = horario;
+      }
+    )
+  }
+
+  // public horarios = [
+  //   {
+  //     "data": "Qua 01/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qua 01/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qua 01/12/2021",
+  //     "hora": "09:00h"
+  //   },
+  //   {
+  //     "data": "Qua 01/12/2021",
+  //     "hora": "10:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   },
+  //   {
+  //     "data": "Qui 02/12/2021",
+  //     "hora": "08:00h"
+  //   }
     
-  ]
+  // ]
 }

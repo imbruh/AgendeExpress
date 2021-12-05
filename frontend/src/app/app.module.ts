@@ -10,8 +10,6 @@ import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import { ChatComponent } from './chat/chat.component';
 
-
-
 @NgModule({
   declarations: [	
     AppComponent,

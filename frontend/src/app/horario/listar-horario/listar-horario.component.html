@@ -33,19 +33,19 @@
 </div>
 
 <div class="btn-acoes">
-    <button mat-raised-button style="background-color: #a1c0a1;"><i class="fas fa-plus-circle" style="margin-right: 4%;"></i>Cadastrar horário</button>
+    <button mat-raised-button style="background-color: #a1c0a1;" (click)="openDialogCadastroHorario()"><i class="fas fa-plus-circle" style="margin-right: 4%;"></i>Cadastrar horário</button>
     <button mat-raised-button style="background-color: #dfd0af; margin-left: 2%;"><i class="fas fa-times-circle" style="margin-right: 4%;"></i>Cancelar horário</button>
 </div>
 
 <div class="cards-agendamentos">
     <mat-card *ngFor="let h of horarios;" style="background-color: #a45785;">
-        <mat-card-subtitle style="color: white;">{{h.data}}</mat-card-subtitle>
-        <mat-card-title style="color: white;">{{h.hora}}</mat-card-title>     
+        <mat-card-subtitle style="color: white;">{{h.diaSemana}} {{h.dia}}/{{h.mes}}/{{h.ano}}</mat-card-subtitle>
+        <mat-card-title style="color: white;">{{h.hora}}:{{h.minuto}}h</mat-card-title>     
     </mat-card>
 </div>
 
 <div class="example-button-container">
-    <button mat-mini-fab style="background-color: #85586c;" (click)="openDialog()">
+    <button mat-mini-fab style="background-color: #85586c;" (click)="openDialogMensagem()">
         <i class="fas fa-comment" style="color: white; font-size: 18px;"></i>
     </button>
 </div>

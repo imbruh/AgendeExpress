@@ -13,6 +13,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { DialogService } from '../shared/services/dialog.service';
 import { DialogBatePapoComponent } from './dialog-bate-papo/dialog-bate-papo.component';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -33,7 +35,9 @@ import { DialogBatePapoComponent } from './dialog-bate-papo/dialog-bate-papo.com
         MatInputModule,
         MatFormFieldModule,
         MatNativeDateModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSelectModule,
+        FormsModule
     ],
   providers: [
     {
