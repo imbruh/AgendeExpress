@@ -19,7 +19,7 @@
     <mat-label>Hora</mat-label>
     <mat-select>
       <mat-option *ngFor="let horario of horariosDisponiveis" [value]="horario" (click)="alterarHora(horario)">
-        {{horario}}
+        {{horario}}h
       </mat-option>
     </mat-select>
   </mat-form-field>

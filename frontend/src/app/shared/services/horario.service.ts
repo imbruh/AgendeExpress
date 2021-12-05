@@ -13,19 +13,31 @@ export class HorarioService {
 
 constructor(private httpClient: HttpClient) { }
 
-  formatarDataHora(data: Date): String {
+  formatarDataHora(data: Date): string {
     let ano = data.getFullYear();
-    let mes = data.getMonth() < 10 ? "0" + data.getMonth() : data.getMonth();
-    let dia = data.getDay() < 10 ? "0" + data.getDay() : data.getDay();
+    let mes = data.getMonth()+1 < 10 ? "0" + data.getMonth()+1 : data.getMonth()+1;
+    let dia = data.getDate() < 10 ? "0" + data.getDate() : data.getDate();
     return `${ano}-${mes}-${dia}T00:00:00`;
+  }
+
+  formatarHora(horarios:Array<string>): Array<string>{
+    let horasFormatadas = [];
+    for(let hr of horarios){
+        if (parseInt(hr) < 10){
+          let horaFormatada = "0"+hr;  
+          hr=horaFormatada;
+        }
+        horasFormatadas.push(hr)
+    }
+    return horasFormatadas;
   }
 
   listarHorarioPorDia(data: String): Observable<HorarioDTO[]>{
     return this.httpClient.get<HorarioDTO[]>(`${this.URL_HORARIO}/listar?dataHora=${data}`);
   }
 
-  filtrarHorarioDisponivel(data: String): Observable<String[]>{
-    return this.httpClient.get<String[]>(`${this.URL_HORARIO}/filtrar-horario?data=${data}`);
+  filtrarHorarioDisponivel(data: string): Observable<string[]>{
+    return this.httpClient.get<string[]>(`${this.URL_HORARIO}/filtrar-horario?data=${data}`);
   }
 
   cadastrarHorario(horarioCadastrarDTO: HorarioCadastrarDTO): Observable<String>{

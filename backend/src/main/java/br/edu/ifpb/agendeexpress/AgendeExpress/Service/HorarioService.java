@@ -3,6 +3,7 @@ package br.edu.ifpb.agendeexpress.AgendeExpress.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,14 @@ public class HorarioService {
 	
 	public String cadastrar(HorarioCadastrarDTO horario) {
 		Horario horarioExistente = horarioRepository.findByDatahora(horario.getDataHora());
-		Cliente cliente = clienteRepository.getById(horario.getIdCliente());
+		Optional<Cliente> cliente = clienteRepository.findById(horario.getIdCliente());
 		if (horarioExistente != null) {
 			return null;
 		}
 		
 		horarioRepository.save(Horario.builder()
 				.datahora(horario.getDataHora())
-				.cliente(cliente)
+				.cliente(cliente.get())
 				.build());
 		
 		return "Horário marcado com sucesso";

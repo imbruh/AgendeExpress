@@ -31,7 +31,6 @@ export class ListarHorarioComponent implements OnInit {
   listarHorariosPorDia() {
     this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje)).subscribe(
       horario => {
-        console.log(horario);
         this.horarios = horario;
       }
     )
