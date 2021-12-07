@@ -22,10 +22,15 @@ export class EmpresaService {
   }
 
   remover(id: number): Observable<object> {
-    return this.httpClient.delete(`${this.URL_EMPRESA}/apagar/?id=${id}`)
+    return this.httpClient.delete(`${this.URL_EMPRESA}/apagar?id=${id}`)
   }
 
   atualizar(empresaAtualizarDTO: EmpresaAtualizarDTO): Observable<Empresa> {
-    return this.httpClient.put<Empresa>(`${this.URL_EMPRESA}/atualizar/`, empresaAtualizarDTO);
+    return this.httpClient.put<Empresa>(`${this.URL_EMPRESA}/atualizar`, empresaAtualizarDTO);
   }
+
+  pesquisarPorID(id: Number): Observable<EmpresaAtualizarDTO> {
+    return this.httpClient.get<EmpresaAtualizarDTO>(`${this.URL_EMPRESA}/pesquisarPorId?id=${id}`);
+  }
+
 }

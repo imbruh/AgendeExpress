@@ -51,4 +51,10 @@ public class EmpresaController {
 	public ResponseEntity<Boolean> atualizar(@RequestBody EmpresaAtualizarDTO dto){
 		return ResponseEntity.ok(this.empresaService.atualizar(dto)); 
 	}
+	
+	@GetMapping("/pesquisarPorId")
+	public EmpresaAtualizarDTO pesquisarPorId(@RequestParam Long id) {
+		return this.empresaService.pesquisarPorId(id);
+	}
+	
 }

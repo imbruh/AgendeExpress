@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmpresaService} from "../../shared/services/empresa.service";
 import {Empresa} from "../../shared/model/empresa";
+import { EmpresaAtualizarDTO } from 'src/app/shared/model/empresaAtualizarDTO';
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -11,18 +12,20 @@ import {Empresa} from "../../shared/model/empresa";
 export class CadastroEmpresaComponent implements OnInit {
 
   empresa: Empresa;
+  empresaAtualizar: EmpresaAtualizarDTO;
   empresas: Array<Empresa>;
 
   constructor(private empresaService: EmpresaService,private rotaAtual: ActivatedRoute, private roteador: Router) {
     this.empresa = new Empresa();
     this.empresas = new Array<Empresa>();
-    // if (this.rotaAtual.snapshot.paramMap.has('id')) {
-    //   const idParaEdicao = Number(this.rotaAtual.snapshot.paramMap.get('id'));
-    //   this.empresaService.pesquisarPorID(idParaEdicao).subscribe(
-    //     empresaRetornado => this.empresa = empresaRetornado
-    //   );
+    this.empresaAtualizar = new EmpresaAtualizarDTO();
+    if (this.rotaAtual.snapshot.paramMap.has('id')) {
+      const idParaEdicao = Number(this.rotaAtual.snapshot.paramMap.get('id'));
+      this.empresaService.pesquisarPorID(idParaEdicao).subscribe(
+        empresaRetornado => this.empresaAtualizar = empresaRetornado
+      );
 
-    // }
+    }
   }
 
   ngOnInit(): void {
@@ -57,4 +60,11 @@ export class CadastroEmpresaComponent implements OnInit {
     // }
 
   }
+
+  atualizarEmpresa(){
+    this.empresaService.atualizar(this.empresaAtualizar).subscribe(()=>{
+        //atualizar "session"
+    })
+}
+
 }

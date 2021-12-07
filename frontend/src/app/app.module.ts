@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import { ChatComponent } from './chat/chat.component';
+import { LayoutsModule } from './layouts/layouts.module';
 
 @NgModule({
   declarations: [	
@@ -23,7 +24,8 @@ import { ChatComponent } from './chat/chat.component';
     CadastroModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    LayoutsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

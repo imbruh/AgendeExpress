@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.ClienteAtualizarDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.ClienteCadastrarDTO;
+import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.ClienteLoginDTO;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Cliente;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Service.ClienteService;
 
 @RestController
@@ -39,4 +42,15 @@ public class ClienteController {
 	public ResponseEntity<Boolean> atualizar(@RequestBody ClienteAtualizarDTO dto){
 		return ResponseEntity.ok(clienteService.atualizar(dto));
 	}
+	
+	@GetMapping("/pesquisarPorId")
+	public ResponseEntity<ClienteAtualizarDTO> pesquisarPorId(@RequestParam Long id){
+		return ResponseEntity.ok(this.clienteService.pesquisarPorId(id));
+	}
+	
+	@PostMapping("/login")
+	public Cliente login(@RequestBody ClienteLoginDTO dto) {
+		return this.clienteService.login(dto);
+	}
+	
 }

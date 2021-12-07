@@ -45,7 +45,7 @@ export class CadastrarHorarioComponent implements OnInit {
     // console.log(dataHora)
     let horarioDTO = new HorarioCadastrarDTO();
     horarioDTO.dataHora = dataHora;
-    horarioDTO.idCliente = 1;
+    horarioDTO.idCliente = 3;
 
     this.horarioService.cadastrarHorario(horarioDTO).subscribe(
       horario => {

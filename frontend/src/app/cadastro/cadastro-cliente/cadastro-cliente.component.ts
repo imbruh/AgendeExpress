@@ -3,6 +3,7 @@ import {Cliente} from "../../shared/model/cliente";
 import {ClienteService} from "../../shared/services/cliente.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import { ClienteCadastrarDTO } from 'src/app/shared/model/clienteCadastrarDTO';
+import { ClienteAtualizarDTO } from 'src/app/shared/model/clienteAtualizarDTO';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -12,16 +13,18 @@ import { ClienteCadastrarDTO } from 'src/app/shared/model/clienteCadastrarDTO';
 export class CadastroClienteComponent implements OnInit {
   cliente: ClienteCadastrarDTO;
   clientes: Array<ClienteCadastrarDTO>;
+  clienteAtualizar:ClienteAtualizarDTO;
 
   constructor(private clienteService: ClienteService,private rotaAtual: ActivatedRoute, private roteador: Router) {
     this.cliente = new ClienteCadastrarDTO();
     this.clientes = new Array<ClienteCadastrarDTO>();
-    // if (this.rotaAtual.snapshot.paramMap.has('id')) {
-    //   const idParaEdicao = Number(this.rotaAtual.snapshot.paramMap.get('id'));
-    //   this.clienteService.pesquisarPorID(idParaEdicao).subscribe(
-    //     clienteRetornado => this.cliente = clienteRetornado
-    //   );
-    // }
+    this.clienteAtualizar = new ClienteAtualizarDTO;
+    if (this.rotaAtual.snapshot.paramMap.has('id')) {
+      const idParaEdicao = Number(this.rotaAtual.snapshot.paramMap.get('id'));
+      this.clienteService.pesquisarPorID(idParaEdicao).subscribe(
+        clienteRetornado => this.clienteAtualizar = clienteRetornado
+      );
+    }
   }
 
   ngOnInit(): void {
@@ -46,6 +49,12 @@ export class CadastroClienteComponent implements OnInit {
     );
 
     this.cliente = new ClienteCadastrarDTO();
+  }
+
+  atualizarCliente(){
+      this.clienteService.atualizar(this.clienteAtualizar).subscribe(()=>{
+          //atualizar "session"
+      })
   }
 
 }

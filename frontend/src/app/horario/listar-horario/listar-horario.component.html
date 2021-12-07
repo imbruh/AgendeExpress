@@ -1,27 +1,9 @@
- <div class="menu">
-    <div class="nome-empresa">
-        <h4>Nome da Empresa</h4>
-    </div>
-    
-    <button mat-button [matMenuTriggerFor]="menu" style="margin-right: 30px;">   
-        <div class="menu-button">
-            <mat-icon class="menu-icone">person</mat-icon>
-        </div>
-    </button>
-
-    <mat-menu #menu="matMenu" class="menu-itens">
-        <div>
-            <button mat-menu-item >Editar perfil</button>
-            <button mat-menu-item>Sair</button>
-        </div>
-        
-    </mat-menu>
-</div>
+<app-menu></app-menu>
 
 <div class="calendario-data">
     <div class="calendario-label">
         <i class="fas fa-calendar-alt"></i>
-        <p>01 de Dezembro, 2021</p>
+        <p>05 de Dezembro, 2021</p>
     </div>
 
     <mat-form-field appearance="fill" style="margin-top: 2%; margin-right: 4%;">

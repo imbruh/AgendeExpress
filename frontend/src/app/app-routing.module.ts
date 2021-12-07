@@ -26,7 +26,16 @@ const routes: Routes = [
   {
     path: 'listagem-empresa',
     component: ListagemEmpresaComponent
-  }
+  },
+  {
+    path: 'cadastro-cliente/:id',
+    component: CadastroClienteComponent
+  },
+  {
+    path: 'cadastro-empresa/:id',
+    component: CadastroEmpresaComponent
+  },
+
 ];
 
 @NgModule({

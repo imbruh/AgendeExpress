@@ -27,12 +27,16 @@ remover(id: number): Observable<object> {
   return this.httpClient.delete(`${this.URL_USUARIO}/apagar/?id=${id}`)
 }
 
-// pesquisarPorID(id: Number): Observable<Cliente> {
-//   return this.httpClient.get<Cliente>(`${this.URL_USUARIO}/${id}`);
-// }
-
-atualizar(clienteAtualizarDTO: ClienteAtualizarDTO): Observable<Boolean> {
-  return this.httpClient.put<Boolean>(`${this.URL_USUARIO}/atualizar`, clienteAtualizarDTO);
+pesquisarPorID(id: Number): Observable<ClienteAtualizarDTO> {
+  return this.httpClient.get<ClienteAtualizarDTO>(`${this.URL_USUARIO}/pesquisarPorId?id=${id}`);
 }
+
+atualizar(clienteAtualizarDTO: ClienteAtualizarDTO): Observable<boolean> {
+  return this.httpClient.put<boolean>(`${this.URL_USUARIO}/atualizar`, clienteAtualizarDTO);
+}
+
+apagarConta(id:Number): Observable<Boolean> {
+    return this.httpClient.delete<Boolean>(`${this.URL_USUARIO}/apagar?id=${id}`);
+  }
 
 }

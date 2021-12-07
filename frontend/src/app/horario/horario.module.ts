@@ -15,12 +15,13 @@ import { DialogService } from '../shared/services/dialog.service';
 import { DialogBatePapoComponent } from './dialog-bate-papo/dialog-bate-papo.component';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from "@angular/forms";
+import { LayoutsModule } from '../layouts/layouts.module';
 
 @NgModule({
     declarations: [
         ListarHorarioComponent,
         CadastrarHorarioComponent,
-        DialogBatePapoComponent
+        DialogBatePapoComponent,
     ],
     exports: [
         ListarHorarioComponent
@@ -37,7 +38,8 @@ import {FormsModule} from "@angular/forms";
         MatNativeDateModule,
         MatDialogModule,
         MatSelectModule,
-        FormsModule
+        FormsModule,
+        LayoutsModule,
     ],
   providers: [
     {

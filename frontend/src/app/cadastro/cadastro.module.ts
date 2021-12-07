@@ -7,6 +7,10 @@ import {FormsModule} from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { CadastroClienteComponent } from './cadastro-cliente/cadastro-cliente.component';
 import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.component';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutsModule } from '../layouts/layouts.module';
 
 
 @NgModule({
@@ -23,7 +27,11 @@ import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.co
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutsModule
   ]
 })
 export class CadastroModule { }
