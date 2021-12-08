@@ -5,6 +5,7 @@ import { ClienteLoginDTO } from 'src/app/shared/model/clienteLoginDTO';
 import { EmpresaLoginDTO } from 'src/app/shared/model/empresaLoginDTO';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
 import { EmpresaService } from 'src/app/shared/services/empresa.service';
+import {MensagemService} from "../shared/services/mensagem.service";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginCliente = true;
   empresas: any = []
 
-  constructor(private clienteService: ClienteService, private empresaService: EmpresaService, private router: Router) { }
+  constructor(private clienteService: ClienteService, private empresaService: EmpresaService, private router: Router, private mensagemService: MensagemService) { }
 
   ngOnInit() {
     this.listarEmpresas();
@@ -34,28 +35,35 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if(this.loginCliente){
-      this.clienteService.login(this.cliente).subscribe(
-        cliente => {
-          if(cliente.id != undefined) { 
-            localStorage.setItem("cliente",cliente.id.toString())
-            this.router.navigate(['inicio']);
-          }
-          else {
-            this.cliente = new ClienteLoginDTO();
-           // COLOCAR SNACKBAR DE CREDENCIAIS INVALIDAS
-          }
-        }
-      )
-    }
+    if(this.cliente.nomeUsuario==undefined || this.cliente.senha==undefined) {
+      this.mensagemService.snackAviso('Preencha todos os campos!');}
     else {
-      this.empresaService.login(this.empresa).subscribe(
-        empresa => {
+      if(this.loginCliente){
+        this.clienteService.login(this.cliente).subscribe(
+          cliente => {
+            if(cliente.id != undefined) {
+              localStorage.setItem("cliente",cliente.id.toString())
+              this.router.navigate(['inicio']);
+              this.mensagemService.snackSucesso("Login Efetuado")
+            }
+            else {
+              this.cliente = new ClienteLoginDTO();
+              this.mensagemService.snackErro('Usuario ou Senha Inválido!')
 
-        }
-      )
+            }
+          }
+        )
+      }
+      else {
+        this.empresaService.login(this.empresa).subscribe(
+          empresa => {
+
+          }
+        )
+      }
     }
-  }
+    }
+
 
   listarEmpresas() {
     this.empresaService.listar().subscribe(

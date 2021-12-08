@@ -37,7 +37,7 @@
             <div class="invalid-feedback">Usuário! O campo não pode ficar em branco</div>
           </div>
 
-            <div class="col-md-12">              
+            <div class="col-md-12">
                 <input *ngIf="clienteAtualizar.id==undefined" [(ngModel)]="cliente.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="senha" placeholder="senha" required>
                 <input *ngIf="clienteAtualizar.id!=undefined" [(ngModel)]="clienteAtualizar.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="senha" placeholder="senha" required>
               <div class="valid-feedback">Senha</div>
@@ -52,8 +52,8 @@
             </div>
 
             <div class="form-button mt-3" style="text-align: center;">
-              <button *ngIf="clienteAtualizar.id==undefined" id="submit" type="submit" class="btn btn-primary" (click)="cadastrarCliente()">Cadastrar</button>
-              <button *ngIf="clienteAtualizar.id!=undefined" id="submit" type="submit" class="btn btn-primary" (click)="atualizarCliente()">Atualizar</button>
+              <button id="submit" type="submit" class="btn btn-primary" (click)="cadastrarCliente()">Cadastrar</button>
+              <button style=" margin-left: 10px;" id="submit" type="submit" class="btn btn-primary" (click)="atualizarCliente()">Atualizar</button>
             </div>
           </form>
         </div>

@@ -11,9 +11,10 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { ChatComponent } from './chat/chat.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { LoginModule } from './login/login.module';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     ChatComponent
    ],
@@ -27,7 +28,8 @@ import { LoginModule } from './login/login.module';
     ReactiveFormsModule,
     FormsModule,
     LayoutsModule,
-    LoginModule
+    LoginModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

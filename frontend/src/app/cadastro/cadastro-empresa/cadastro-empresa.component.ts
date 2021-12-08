@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {EmpresaService} from "../../shared/services/empresa.service";
 import {Empresa} from "../../shared/model/empresa";
 import { EmpresaAtualizarDTO } from 'src/app/shared/model/empresaAtualizarDTO';
+import {MensagemService} from "../../shared/services/mensagem.service";
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -15,7 +16,7 @@ export class CadastroEmpresaComponent implements OnInit {
   empresaAtualizar: EmpresaAtualizarDTO;
   empresas: Array<Empresa>;
 
-  constructor(private empresaService: EmpresaService,private rotaAtual: ActivatedRoute, private roteador: Router) {
+  constructor(private empresaService: EmpresaService,private rotaAtual: ActivatedRoute, private roteador: Router, private mensagemService: MensagemService) {
     this.empresa = new Empresa();
     this.empresas = new Array<Empresa>();
     this.empresaAtualizar = new EmpresaAtualizarDTO();
@@ -29,7 +30,7 @@ export class CadastroEmpresaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   listar() {
@@ -49,17 +50,23 @@ export class CadastroEmpresaComponent implements OnInit {
     //     }
     //   )
     // }else {
-    this.empresaService.cadastrarEmpresa(this.empresa).subscribe(
-      empresaCadastrado =>  {
-        console.log(empresaCadastrado)
-        this.roteador.navigate(['inicio'])
-      }
-    );
+    if(this.empresa.nome==undefined || this.empresa.cnpj==undefined || this.empresa.senha==undefined) {
+      this.mensagemService.snackAviso('Preencha todos os campos!');}
+    else{
+      this.empresaService.cadastrarEmpresa(this.empresa).subscribe(
+        empresaCadastrado =>  {
+          console.log(empresaCadastrado)
+          this.roteador.navigate(['inicio'])
+          this.mensagemService.snackSucesso("Empresa Cadastrada♥")
+        }
+      );
 
-    this.empresa = new Empresa();
-    // }
+      this.empresa = new Empresa();
+      // }
 
-  }
+    }
+    }
+
 
   atualizarEmpresa(){
     this.empresaService.atualizar(this.empresaAtualizar).subscribe(()=>{

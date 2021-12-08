@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { ClienteCadastrarDTO } from 'src/app/shared/model/clienteCadastrarDTO';
 import { ClienteAtualizarDTO } from 'src/app/shared/model/clienteAtualizarDTO';
 import { EmpresaService } from 'src/app/shared/services/empresa.service';
+import {MensagemService} from "../../shared/services/mensagem.service";
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -17,7 +18,7 @@ export class CadastroClienteComponent implements OnInit {
   clienteAtualizar:ClienteAtualizarDTO;
   empresas:any = []
 
-  constructor(private clienteService: ClienteService, private empresaService: EmpresaService, private rotaAtual: ActivatedRoute, private roteador: Router) {
+  constructor(private clienteService: ClienteService, private empresaService: EmpresaService, private rotaAtual: ActivatedRoute, private roteador: Router, private mensagemService: MensagemService) {
     this.cliente = new ClienteCadastrarDTO();
     this.clientes = new Array<ClienteCadastrarDTO>();
     this.clienteAtualizar = new ClienteAtualizarDTO;
@@ -31,11 +32,11 @@ export class CadastroClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.empresaService.listar().subscribe(
-        empresas =>{
-            this.empresas = empresas
-    })
+      empresas =>{
+        this.empresas = empresas
+      })
   }
-  
+
   cadastrarCliente (): void{
     // if (this.cliente.id) {
     //   this.clienteService.atualizar(this.cliente).subscribe(
@@ -46,24 +47,31 @@ export class CadastroClienteComponent implements OnInit {
     //   )
     // }else {
     console.log(this.cliente)
-    this.clienteService.cadastrarCliente(this.cliente).subscribe(
-      clienteCadastrado =>  {
+    if(this.cliente.nome==undefined || this.cliente.email==undefined || this.cliente.senha==undefined || this.cliente.telefone==undefined) {
+      this.mensagemService.snackAviso('Preencha todos os campos!');
+
+  }else{
+      this.clienteService.cadastrarCliente(this.cliente).subscribe(
+        clienteCadastrado =>  {
           if(clienteCadastrado.id != undefined){
-              localStorage.setItem("cliente",clienteCadastrado.id.toString());
-              this.roteador.navigate(['inicio'])
+            localStorage.setItem("cliente",clienteCadastrado.id.toString());
+            this.roteador.navigate(['inicio'])
+            this.mensagemService.snackSucesso('Cliente Cadastrado')
           }
           else{
-              //snackbar
-              this.cliente = new ClienteCadastrarDTO();
+            //snackbar
+            this.cliente = new ClienteCadastrarDTO();
           }
-      }
-    );
+        }
+      );
+    }
+
   }
 
   atualizarCliente(){
-      this.clienteService.atualizar(this.clienteAtualizar).subscribe(()=>{
-          //atualizar "session"
-      })
+    this.clienteService.atualizar(this.clienteAtualizar).subscribe(()=>{
+      //atualizar "session"
+    })
   }
 
 }
