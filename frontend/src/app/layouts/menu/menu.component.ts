@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/shared/model/cliente';
-import { ClienteAtualizarDTO } from 'src/app/shared/model/clienteAtualizarDTO';
 import { Empresa } from 'src/app/shared/model/empresa';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
 import { EmpresaService } from 'src/app/shared/services/empresa.service';
@@ -15,11 +14,34 @@ export class MenuComponent implements OnInit {
   cliente = new Cliente();
   empresa = new Empresa();
   logado:any;
-  clienteAtualizar = new ClienteAtualizarDTO;
   constructor(private clienteService:ClienteService, private empresaService:EmpresaService, private roteador: Router) { }
 
   ngOnInit() {
-      this.clienteAtualizar.id=4;
+    let clienteLogadoId = localStorage.getItem("cliente");
+    let empresaId = localStorage.getItem("empresa");
+    let empresaLogadaId = localStorage.getItem("empresaLogada");
+    if (clienteLogadoId != undefined && clienteLogadoId != "0" && empresaId != undefined && empresaId != "0"){
+        this.clienteService.pesquisarPorID(parseInt(clienteLogadoId)).subscribe(
+            cliente =>{
+                this.cliente=cliente;
+            }
+        )
+
+        this.empresaService.pesquisarPorID(parseInt(empresaId)).subscribe(
+            empresa =>{
+                this.empresa=empresa
+            }
+        )
+    }else if (empresaLogadaId != undefined && empresaLogadaId != "0"){
+        this.empresaService.pesquisarPorID(parseInt(empresaLogadaId)).subscribe(
+            empresa =>{
+                this.empresa=empresa
+            }
+        )
+    }else{
+        this.roteador.navigate([""])
+    }
+    
   }
 
   
@@ -52,5 +74,10 @@ export class MenuComponent implements OnInit {
         )
     }
 }
+    logout(){
+        localStorage.setItem("cliente","0")
+        localStorage.setItem("empresa","0")
+        this.roteador.navigate([""])
+    }
 
 }

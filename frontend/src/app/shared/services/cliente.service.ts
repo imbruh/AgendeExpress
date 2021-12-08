@@ -28,8 +28,8 @@ export class ClienteService {
     return this.httpClient.delete(`${this.URL_USUARIO}/apagar/?id=${id}`)
   }
 
-  pesquisarPorID(id: Number): Observable<ClienteAtualizarDTO> {
-    return this.httpClient.get<ClienteAtualizarDTO>(`${this.URL_USUARIO}/pesquisarPorId?id=${id}`);
+  pesquisarPorID(id: Number): Observable<Cliente> {
+    return this.httpClient.get<Cliente>(`${this.URL_USUARIO}/pesquisarPorId?id=${id}`);
   }
 
   atualizar(clienteAtualizarDTO: ClienteAtualizarDTO): Observable<boolean> {

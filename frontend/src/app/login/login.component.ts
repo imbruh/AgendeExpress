@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+<<<<<<< HEAD
     if(this.cliente.nomeUsuario==undefined || this.cliente.senha==undefined) {
       this.mensagemService.snackAviso('Preencha todos os campos!');}
     else {
@@ -51,6 +52,15 @@ export class LoginComponent implements OnInit {
               this.mensagemService.snackErro('Usuario ou Senha Inválido!')
 
             }
+=======
+    if(this.loginCliente){
+      this.clienteService.login(this.cliente).subscribe(
+        cliente => {
+          if(cliente.id != undefined && this.cliente.idEmpresa!= undefined) { 
+            localStorage.setItem("cliente",cliente.id.toString())
+            localStorage.setItem("empresa",this.cliente.idEmpresa.toString())
+            this.router.navigate(['inicio']);
+>>>>>>> 8a47d79ae9ca98aeb89000255eb2ffee83973b0a
           }
         )
       }
@@ -62,6 +72,18 @@ export class LoginComponent implements OnInit {
         )
       }
     }
+<<<<<<< HEAD
+=======
+    else {
+      this.empresaService.login(this.empresa).subscribe(
+        empresa => {
+            if(empresa.id != undefined) { 
+                localStorage.setItem("empresaLogada",empresa.id.toString())
+                this.router.navigate(["inicio"])
+            }
+        }
+      )
+>>>>>>> 8a47d79ae9ca98aeb89000255eb2ffee83973b0a
     }
 
 

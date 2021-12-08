@@ -48,10 +48,10 @@ public class HorarioService {
 			HorarioListarDTO hrDTO =  HorarioListarDTO.builder()
 			.ano(hr.getDatahora().getYear())
 			.mes(hr.getDatahora().getMonthValue())
-			.dia(hr.getDatahora().getDayOfMonth())
-			.hora(hr.getDatahora().getHour())
+			.dia(hr.getDatahora().getDayOfMonth() < 10 ? "0" + hr.getDatahora().getDayOfMonth() : "" + hr.getDatahora().getDayOfMonth())
+			.hora(hr.getDatahora().getHour() < 10 ? "0" + hr.getDatahora().getHour() : "" + hr.getDatahora().getHour())
 			.minuto(hr.getDatahora().getMinute())
-			.diaSemana(hr.getDatahora().getDayOfWeek().toString())
+			.diaSemana(hr.getDatahora().getDayOfWeek().getValue())
 			.build();
 			horariosDTO.add(hrDTO);
 		}

@@ -78,11 +78,11 @@ public class EmpresaService {
 		
 	}
 
-	public String login(EmpresaLoginDTO dto) {
+	public Empresa login(EmpresaLoginDTO dto) {
 		Empresa empresa = this.empresaRepository.findByCnpjAndSenha(dto.getCnpj(), dto.getSenha());
 		if (empresa == null) {
 			return null;			
 		}
-		return empresa.getCnpj();
+		return empresa;
 	}
 }

@@ -7,10 +7,10 @@ import lombok.Data;
 @Builder
 public class HorarioListarDTO {
 
-	private int dia;
+	private String dia;
 	private int mes;
 	private int ano;
-	private int hora;
+	private String hora;
 	private int minuto;
-	private String diaSemana;
+	private int diaSemana;
 }

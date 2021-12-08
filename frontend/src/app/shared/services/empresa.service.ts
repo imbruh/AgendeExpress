@@ -34,8 +34,8 @@ export class EmpresaService {
     return this.httpClient.get<EmpresaAtualizarDTO>(`${this.URL_EMPRESA}/pesquisarPorId?id=${id}`);
   }
 
-  login(empresaLogin: EmpresaLoginDTO): Observable<string> {
-    return this.httpClient.post<string>(`${this.URL_EMPRESA}/login`, empresaLogin)
+  login(empresaLogin: EmpresaLoginDTO): Observable<Empresa> {
+    return this.httpClient.post<Empresa>(`${this.URL_EMPRESA}/login`, empresaLogin)
   }
 
 }

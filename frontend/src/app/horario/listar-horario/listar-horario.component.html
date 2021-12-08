@@ -3,7 +3,7 @@
 <div class="calendario-data">
     <div class="calendario-label">
         <i class="fas fa-calendar-alt"></i>
-        <p>05 de Dezembro, 2021</p>
+        <p>{{dataHojeFormatada}}</p>
     </div>
 
     <mat-form-field appearance="fill" style="margin-top: 2%; margin-right: 4%;">
@@ -14,7 +14,7 @@
     </mat-form-field>
 </div>
 
-<div class="btn-acoes">
+<div class="btn-acoes" *ngIf="clienteLogado">
     <button mat-raised-button style="background-color: #a1c0a1;" (click)="openDialogCadastroHorario()"><i class="fas fa-plus-circle" style="margin-right: 4%;"></i>Cadastrar horário</button>
     <button mat-raised-button style="background-color: #dfd0af; margin-left: 2%;"><i class="fas fa-times-circle" style="margin-right: 4%;"></i>Cancelar horário</button>
 </div>

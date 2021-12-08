@@ -4,5 +4,5 @@ export class HorarioDTO {
 	ano?: number ;
 	hora?: number ;
 	minuto?: number ;
-	diaSemana?: String ;
+	diaSemana?: any ;
 }

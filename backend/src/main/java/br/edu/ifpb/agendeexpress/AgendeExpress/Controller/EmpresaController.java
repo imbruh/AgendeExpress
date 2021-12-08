@@ -60,7 +60,7 @@ public class EmpresaController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestBody EmpresaLoginDTO dto) {
+	public Empresa login(@RequestBody EmpresaLoginDTO dto) {
 		return this.empresaService.login(dto);
 	}
 }
