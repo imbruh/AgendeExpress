@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClienteComponent} from 'src/app/login/cliente/cliente.component'
+import { LoginComponent} from 'src/app/login/login.component'
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +17,6 @@ import { RouterModule } from '@angular/router';
     LayoutsModule,
     RouterModule
   ],
-  declarations: [ClienteComponent]
+  declarations: [LoginComponent]
 })
 export class LoginModule { }

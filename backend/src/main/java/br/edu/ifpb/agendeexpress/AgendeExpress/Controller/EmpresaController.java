@@ -40,7 +40,7 @@ public class EmpresaController {
 	}
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Boolean> cadastrar(@RequestBody Empresa empresa){
+	public ResponseEntity<Empresa> cadastrar(@RequestBody Empresa empresa){
 		return ResponseEntity.ok(this.empresaService.cadastrar(empresa)); 
 	}
 	

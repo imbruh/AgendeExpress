@@ -93,7 +93,7 @@ form-holder .form-content {
   color: rgb(0, 0, 0);
 }
 
-.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email] {
   width: 100%;
   padding: 9px 20px;
   text-align: left;
@@ -107,6 +107,11 @@ form-holder .form-content {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   margin-top: 16px;
+}
+
+.form-content select{
+    border-radius: 6px;
+    padding: 9px 20px;
 }
 
 .btn-primary{

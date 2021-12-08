@@ -52,7 +52,7 @@ export class CadastroEmpresaComponent implements OnInit {
     this.empresaService.cadastrarEmpresa(this.empresa).subscribe(
       empresaCadastrado =>  {
         console.log(empresaCadastrado)
-        this.roteador.navigate([''])
+        this.roteador.navigate(['inicio'])
       }
     );
 

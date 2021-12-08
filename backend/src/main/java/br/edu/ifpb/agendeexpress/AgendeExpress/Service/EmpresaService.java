@@ -24,15 +24,15 @@ public class EmpresaService {
 	@Autowired
 	private ClienteEmpresaRepository clienteEmpresaRepository;
 	
-	public Boolean cadastrar(Empresa empresa) {
+	public Empresa cadastrar(Empresa empresa) {
 		Empresa empresaExistente = empresaRepository.findByCnpj(empresa.getCnpj());
 		
 		if(empresaExistente == null) {
-			this.empresaRepository.save(empresa);
-			return true;
+			Empresa empresaCadastrada = this.empresaRepository.save(empresa);
+			return empresaCadastrada;
 		}
 		
-		return false;
+		return null;
 	}
 
 	public Boolean apagar(Long id) {

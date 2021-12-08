@@ -29,7 +29,7 @@ public class ClienteController {
 	private ClienteService clienteService;
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Boolean> cadastrar(@RequestBody ClienteCadastrarDTO dto){
+	public ResponseEntity<Cliente> cadastrar(@RequestBody ClienteCadastrarDTO dto){
 		return ResponseEntity.ok(clienteService.cadastrar(dto));
 	}
 	
@@ -49,8 +49,8 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@RequestBody ClienteLoginDTO dto) {
-		return this.clienteService.login(dto);
+	public ResponseEntity<Cliente> login(@RequestBody ClienteLoginDTO dto) {
+		return ResponseEntity.ok(this.clienteService.login(dto));
 	}
 	
 }

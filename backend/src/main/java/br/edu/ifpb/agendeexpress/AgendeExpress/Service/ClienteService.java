@@ -41,16 +41,16 @@ public class ClienteService {
 	@Autowired
 	private HorarioRepository horarioRepository;
 	
-	public Boolean cadastrar(ClienteCadastrarDTO dto) {
+	public Cliente cadastrar(ClienteCadastrarDTO dto) {
 		Cliente clienteEmailExistente = clienteRepository.findByEmail(dto.getEmail());
 
 		if (clienteEmailExistente != null) {
-			return false;
+			return null;
 		}
 		Cliente clienteUsuarioExistente = clienteRepository.findByUsuario(dto.getUsuario());
 		
 		if (clienteUsuarioExistente != null) {
-			return false;
+			return null;
 		}
 		
 		Cliente cliente = clienteRepository.save(Cliente.builder()
@@ -64,7 +64,7 @@ public class ClienteService {
 		for (Long id : dto.getIdEmpresa()) {
 			Optional<Empresa> empresa = empresaRepository.findById(id);
 			if (empresa == null) {
-				return false;
+				return null;
 			}
 			ClienteEmpresa clienteEmpresa = ClienteEmpresa.builder()
 					.cliente(cliente)
@@ -73,7 +73,7 @@ public class ClienteService {
 			this.clienteEmpresaRepository.save(clienteEmpresa);
 		}
 		
-		return true;
+		return cliente;
 	}
 
 	@Transactional
@@ -137,12 +137,12 @@ public class ClienteService {
 				.build();
 	}
 
-	public String login(ClienteLoginDTO dto) {
+	public Cliente login(ClienteLoginDTO dto) {
 		Cliente cliente = this.clienteRepository.findByUsuarioAndSenha(dto.getNomeUsuario(), dto.getSenha());
 		if (cliente == null) {
 			return null;			
 		}
-		return cliente.getUsuario();
+		return cliente;
 	}
 	
 }

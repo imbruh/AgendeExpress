@@ -7,11 +7,11 @@ import { ClienteService } from 'src/app/shared/services/cliente.service';
 import { EmpresaService } from 'src/app/shared/services/empresa.service';
 
 @Component({
-  selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class ClienteComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   cliente = new ClienteLoginDTO();
   empresa = new EmpresaLoginDTO();
@@ -37,14 +37,14 @@ export class ClienteComponent implements OnInit {
     if(this.loginCliente){
       this.clienteService.login(this.cliente).subscribe(
         cliente => {
-          console.log(cliente)
-          // if(cliente == undefined) { 
-          //   this.cliente = new ClienteLoginDTO();
-          //   // COLOCAR SNACKBAR DE CREDENCIAIS INVALIDAS
-          // }
-          // else {
+          if(cliente.id != undefined) { 
+            localStorage.setItem("cliente",cliente.id.toString())
             this.router.navigate(['inicio']);
-          // }
+          }
+          else {
+            this.cliente = new ClienteLoginDTO();
+           // COLOCAR SNACKBAR DE CREDENCIAIS INVALIDAS
+          }
         }
       )
     }

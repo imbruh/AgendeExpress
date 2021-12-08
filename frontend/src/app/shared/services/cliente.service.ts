@@ -16,8 +16,8 @@ export class ClienteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  cadastrarCliente(clienteCadastrarDTO: ClienteCadastrarDTO): Observable<Boolean> {
-    return this.httpClient.post<Boolean>(`${this.URL_USUARIO}/cadastrar`, clienteCadastrarDTO);
+  cadastrarCliente(clienteCadastrarDTO: ClienteCadastrarDTO): Observable<Cliente> {
+    return this.httpClient.post<Cliente>(`${this.URL_USUARIO}/cadastrar`, clienteCadastrarDTO);
   }
 
   // listar(): Observable<Cliente[]> {
@@ -40,8 +40,8 @@ export class ClienteService {
     return this.httpClient.delete<Boolean>(`${this.URL_USUARIO}/apagar?id=${id}`);
   }
 
-  login(clienteLogin: ClienteLoginDTO): Observable<any> {
-    return this.httpClient.post<any>(`${this.URL_USUARIO}/login`, clienteLogin)
+  login(clienteLogin: ClienteLoginDTO): Observable<Cliente> {
+    return this.httpClient.post<Cliente>(`${this.URL_USUARIO}/login`, clienteLogin)
   }
 
 }

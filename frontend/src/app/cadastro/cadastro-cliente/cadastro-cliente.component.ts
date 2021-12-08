@@ -4,6 +4,7 @@ import {ClienteService} from "../../shared/services/cliente.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import { ClienteCadastrarDTO } from 'src/app/shared/model/clienteCadastrarDTO';
 import { ClienteAtualizarDTO } from 'src/app/shared/model/clienteAtualizarDTO';
+import { EmpresaService } from 'src/app/shared/services/empresa.service';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -14,9 +15,9 @@ export class CadastroClienteComponent implements OnInit {
   cliente: ClienteCadastrarDTO;
   clientes: Array<ClienteCadastrarDTO>;
   clienteAtualizar:ClienteAtualizarDTO;
-  empresas = ['a','b','c']
+  empresas:any = []
 
-  constructor(private clienteService: ClienteService,private rotaAtual: ActivatedRoute, private roteador: Router) {
+  constructor(private clienteService: ClienteService, private empresaService: EmpresaService, private rotaAtual: ActivatedRoute, private roteador: Router) {
     this.cliente = new ClienteCadastrarDTO();
     this.clientes = new Array<ClienteCadastrarDTO>();
     this.clienteAtualizar = new ClienteAtualizarDTO;
@@ -29,7 +30,10 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.empresaService.listar().subscribe(
+        empresas =>{
+            this.empresas = empresas
+    })
   }
   
   cadastrarCliente (): void{
@@ -44,12 +48,16 @@ export class CadastroClienteComponent implements OnInit {
     console.log(this.cliente)
     this.clienteService.cadastrarCliente(this.cliente).subscribe(
       clienteCadastrado =>  {
-        console.log(clienteCadastrado)
-        this.roteador.navigate([''])
+          if(clienteCadastrado.id != undefined){
+              localStorage.setItem("cliente",clienteCadastrado.id.toString());
+              this.roteador.navigate(['inicio'])
+          }
+          else{
+              //snackbar
+              this.cliente = new ClienteCadastrarDTO();
+          }
       }
     );
-
-    this.cliente = new ClienteCadastrarDTO();
   }
 
   atualizarCliente(){

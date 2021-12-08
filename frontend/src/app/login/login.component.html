@@ -60,9 +60,9 @@
               </div>
 
               <div class="col-md-12" *ngIf="loginCliente">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Escolha uma empresa</option>
-                  <option *ngFor="let empresa of empresas" value="empresa.nome">{{empresa.nome}}</option>
+                <label for="empresa" style="margin-top:4%;">Escolha uma empresa</label>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="cliente.idEmpresa" [ngModelOptions]="{standalone: true}" required>
+                  <option *ngFor="let empresa of empresas" value={{empresa.id}}>{{empresa.nome}}</option>
                 </select>
               </div>
 
