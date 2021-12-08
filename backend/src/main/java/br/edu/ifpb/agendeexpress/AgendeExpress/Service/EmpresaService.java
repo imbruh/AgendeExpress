@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.EmpresaAtualizarDTO;
+import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.EmpresaLoginDTO;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Cliente;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.ClienteEmpresa;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Empresa;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.ClienteEmpresaRepository;
@@ -74,5 +76,13 @@ public class EmpresaService {
 				.senha(empresa.get().getSenha())
 				.build();
 		
+	}
+
+	public String login(EmpresaLoginDTO dto) {
+		Empresa empresa = this.empresaRepository.findByCnpjAndSenha(dto.getCnpj(), dto.getSenha());
+		if (empresa == null) {
+			return null;			
+		}
+		return empresa.getCnpj();
 	}
 }

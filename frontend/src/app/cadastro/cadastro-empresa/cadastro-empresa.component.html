@@ -24,8 +24,8 @@
             </div>
 
             <div class="col-md-12">
-              <input *ngIf="empresaAtualizar.id!=undefined" [(ngModel)]="empresaAtualizar.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="password" placeholder="Password" required>
-              <input *ngIf="empresaAtualizar.id==undefined" [(ngModel)]="empresa.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="password" placeholder="Password" required>
+              <input *ngIf="empresaAtualizar.id!=undefined" [(ngModel)]="empresaAtualizar.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="password" placeholder="Senha" required>
+              <input *ngIf="empresaAtualizar.id==undefined" [(ngModel)]="empresa.senha" [ngModelOptions]="{standalone: true}" class="form-control" type="password" name="password" placeholder="Senha" required>
               <div class="valid-feedback">Password válido</div>
               <div class="invalid-feedback">Password o campo não pode ficar em branco!</div>
             </div>

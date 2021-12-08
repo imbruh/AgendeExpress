@@ -3,6 +3,7 @@ import {Empresa} from "../model/empresa";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import { EmpresaAtualizarDTO } from '../model/empresaAtualizarDTO';
+import { EmpresaLoginDTO } from '../model/empresaLoginDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class EmpresaService {
 
   pesquisarPorID(id: Number): Observable<EmpresaAtualizarDTO> {
     return this.httpClient.get<EmpresaAtualizarDTO>(`${this.URL_EMPRESA}/pesquisarPorId?id=${id}`);
+  }
+
+  login(empresaLogin: EmpresaLoginDTO): Observable<string> {
+    return this.httpClient.post<string>(`${this.URL_EMPRESA}/login`, empresaLogin)
   }
 
 }

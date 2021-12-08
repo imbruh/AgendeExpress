@@ -137,12 +137,12 @@ public class ClienteService {
 				.build();
 	}
 
-	public Cliente login(ClienteLoginDTO dto) {
-		Cliente cliente = this.clienteRepository.findByUsuarioAndSenha(dto.getUsuario(), dto.getSenha());
+	public String login(ClienteLoginDTO dto) {
+		Cliente cliente = this.clienteRepository.findByUsuarioAndSenha(dto.getNomeUsuario(), dto.getSenha());
 		if (cliente == null) {
 			return null;			
 		}
-		return cliente;
+		return cliente.getUsuario();
 	}
 	
 }

@@ -5,10 +5,15 @@ import {CadastroClienteComponent} from "./cadastro/cadastro-cliente/cadastro-cli
 import {CadastroEmpresaComponent} from "./cadastro/cadastro-empresa/cadastro-empresa.component";
 import {ListagemClienteComponent} from "./cadastro/listagem-cliente/listagem-cliente.component";
 import {ListagemEmpresaComponent} from "./cadastro/listagem-empresa/listagem-empresa.component";
+import { ClienteComponent } from './login/cliente/cliente.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: ClienteComponent
+  },
+  {
+    path: 'inicio',
     component: ListarHorarioComponent
   },
   {

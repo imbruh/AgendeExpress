@@ -49,7 +49,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/login")
-	public Cliente login(@RequestBody ClienteLoginDTO dto) {
+	public String login(@RequestBody ClienteLoginDTO dto) {
 		return this.clienteService.login(dto);
 	}
 	

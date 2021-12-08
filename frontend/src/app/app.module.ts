@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import { ChatComponent } from './chat/chat.component';
 import { LayoutsModule } from './layouts/layouts.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [	
@@ -25,7 +26,8 @@ import { LayoutsModule } from './layouts/layouts.module';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    LayoutsModule
+    LayoutsModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

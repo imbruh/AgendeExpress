@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.ClienteLoginDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.EmpresaAtualizarDTO;
+import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.EmpresaLoginDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Empresa;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.EmpresaRepository;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Service.EmpresaService;
@@ -57,4 +59,8 @@ public class EmpresaController {
 		return this.empresaService.pesquisarPorId(id);
 	}
 	
+	@PostMapping("/login")
+	public String login(@RequestBody EmpresaLoginDTO dto) {
+		return this.empresaService.login(dto);
+	}
 }

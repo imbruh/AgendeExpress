@@ -2,13 +2,16 @@ package br.edu.ifpb.agendeexpress.AgendeExpress.DTO;
 
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import lombok.Data;
 
 @Data
-public class ClienteLoginDTO {
-	
+public class EmpresaLoginDTO {
+
 	@NotBlank
-	private String nomeUsuario;
+	@CNPJ
+	private String cnpj;
 	
 	@NotBlank
 	private String senha;

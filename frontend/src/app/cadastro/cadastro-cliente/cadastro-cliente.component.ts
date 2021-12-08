@@ -14,6 +14,7 @@ export class CadastroClienteComponent implements OnInit {
   cliente: ClienteCadastrarDTO;
   clientes: Array<ClienteCadastrarDTO>;
   clienteAtualizar:ClienteAtualizarDTO;
+  empresas = ['a','b','c']
 
   constructor(private clienteService: ClienteService,private rotaAtual: ActivatedRoute, private roteador: Router) {
     this.cliente = new ClienteCadastrarDTO();

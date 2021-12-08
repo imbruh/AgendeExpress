@@ -43,6 +43,14 @@
               <div class="valid-feedback">Senha</div>
               <div class="invalid-feedback">A senha não pode ficar em branco</div>
             </div>
+
+            <div class="col-md-12">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Escolha uma empresa</option>
+                <option *ngFor="let empresa of empresas" value="empresa">{{empresa}}</option>
+              </select>
+            </div>
+
             <div class="form-button mt-3" style="text-align: center;">
               <button *ngIf="clienteAtualizar.id==undefined" id="submit" type="submit" class="btn btn-primary" (click)="cadastrarCliente()">Cadastrar</button>
               <button *ngIf="clienteAtualizar.id!=undefined" id="submit" type="submit" class="btn btn-primary" (click)="atualizarCliente()">Atualizar</button>
