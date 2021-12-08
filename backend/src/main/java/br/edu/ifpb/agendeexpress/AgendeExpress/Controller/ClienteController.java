@@ -44,7 +44,7 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/pesquisarPorId")
-	public ResponseEntity<ClienteAtualizarDTO> pesquisarPorId(@RequestParam Long id){
+	public ResponseEntity<Cliente> pesquisarPorId(@RequestParam Long id){
 		return ResponseEntity.ok(this.clienteService.pesquisarPorId(id));
 	}
 	

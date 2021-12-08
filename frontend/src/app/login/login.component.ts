@@ -37,8 +37,9 @@ export class LoginComponent implements OnInit {
     if(this.loginCliente){
       this.clienteService.login(this.cliente).subscribe(
         cliente => {
-          if(cliente.id != undefined) { 
+          if(cliente.id != undefined && this.cliente.idEmpresa!= undefined) { 
             localStorage.setItem("cliente",cliente.id.toString())
+            localStorage.setItem("empresa",this.cliente.idEmpresa.toString())
             this.router.navigate(['inicio']);
           }
           else {
@@ -51,7 +52,10 @@ export class LoginComponent implements OnInit {
     else {
       this.empresaService.login(this.empresa).subscribe(
         empresa => {
-
+            if(empresa.id != undefined) { 
+                localStorage.setItem("empresaLogada",empresa.id.toString())
+                this.router.navigate(["inicio"])
+            }
         }
       )
     }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HorarioService } from 'src/app/shared/services/horario.service';
 import { HorarioCadastrarDTO } from 'src/app/shared/model/horarioCadastrarDTO';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/shared/model/cliente';
+import { ClienteService } from 'src/app/shared/services/cliente.service';
 
 @Component({
   selector: 'app-cadastrar-horario',
@@ -13,12 +15,23 @@ export class CadastrarHorarioComponent implements OnInit {
   horariosDisponiveis: Array<String> = [];
   data = new Date();
   hora = '';
+  cliente = new Cliente()
 
-  constructor(private horarioService: HorarioService, private roteador: Router) { }
+  constructor(private horarioService: HorarioService,private clienteService: ClienteService, private roteador: Router) { }
 
   ngOnInit() {
     this.listarHorariosDisponiveis();
-  }
+    let clienteLogadoId = localStorage.getItem("cliente");
+    if (clienteLogadoId != undefined && clienteLogadoId != "0"){
+        this.clienteService.pesquisarPorID(parseInt(clienteLogadoId)).subscribe(
+            cliente =>{
+                this.cliente=cliente;
+            }
+        )
+      }else{
+          this.roteador.navigate([""])
+      }
+    }
 
   listarHorariosDisponiveis() {
     console.log(this.data)
@@ -45,7 +58,7 @@ export class CadastrarHorarioComponent implements OnInit {
     // console.log(dataHora)
     let horarioDTO = new HorarioCadastrarDTO();
     horarioDTO.dataHora = dataHora;
-    horarioDTO.idCliente = 3;
+    horarioDTO.idCliente = this.cliente.id;
 
     this.horarioService.cadastrarHorario(horarioDTO).subscribe(
       horario => {

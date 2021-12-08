@@ -122,12 +122,12 @@ public class ClienteService {
 		return false;
 	}
 
-	public ClienteAtualizarDTO pesquisarPorId(Long id) {
+	public Cliente pesquisarPorId(Long id) {
 		Optional<Cliente> clienteAtualizar = clienteRepository.findById(id);
 		if (!clienteAtualizar.isPresent()) {
 			return null;		
 		}
-		return ClienteAtualizarDTO.builder()
+		return Cliente.builder()
 				.id(clienteAtualizar.get().getId())
 				.email(clienteAtualizar.get().getEmail())
 				.nome(clienteAtualizar.get().getNome())

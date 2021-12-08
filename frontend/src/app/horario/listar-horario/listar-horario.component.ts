@@ -4,8 +4,12 @@ import { Router } from '@angular/router';
 import { Cliente } from 'src/app/shared/model/cliente';
 import { Empresa } from 'src/app/shared/model/empresa';
 import { HorarioDTO } from 'src/app/shared/model/horarioDTO';
+import { ClienteService } from 'src/app/shared/services/cliente.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { HorarioService } from 'src/app/shared/services/horario.service';
+import { EmpresaService } from 'src/app/shared/services/empresa.service';
+import { MesEnum } from 'src/app/shared/model/enum/mes.enum';
+import { DiaSemanaEnum } from 'src/app/shared/model/enum/diaSemana.enum';
 
 @Component({
   selector: 'app-listar-horario',
@@ -17,8 +21,11 @@ export class ListarHorarioComponent implements OnInit {
   empresa = new Empresa();
   hoje = new Date();
   horarios: Array<HorarioDTO> = [];
+  logado:any;
+  dataHojeFormatada = "";
+  clienteLogado=true;
 
-  constructor(public dialog: MatDialog, private dialogService: DialogService, private horarioService: HorarioService, public dialogRef: MatDialogRef<DialogService>, private roteador: Router) {}
+  constructor(private clienteService: ClienteService, private empresaService: EmpresaService, public dialog: MatDialog, private dialogService: DialogService, private horarioService: HorarioService, public dialogRef: MatDialogRef<DialogService>, private roteador: Router) {}
 
   openDialogMensagem() {
     this.dialogService.openDialogMensagens();
@@ -29,21 +36,45 @@ export class ListarHorarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.listarHorariosPorDia();
     
+    this.dataHoje();
+    // this.listarHorariosPorDia();
+    let clienteLogadoId = localStorage.getItem("cliente");
+    let empresaLogadaId = localStorage.getItem("empresaLogada");
+    if (clienteLogadoId != undefined && clienteLogadoId != "0"){
+        this.clienteService.pesquisarPorID(parseInt(clienteLogadoId)).subscribe(
+            cliente =>{
+                this.logado=cliente;
+                this.clienteLogado=true;
+            }
+        )
+    }else if (empresaLogadaId != undefined && empresaLogadaId != "0"){
+        this.empresaService.pesquisarPorID(parseInt(empresaLogadaId)).subscribe(
+            empresa =>{
+                this.empresa=empresa
+                this.clienteLogado=false;
+            }
+        )
+      }else{
+        this.roteador.navigate([""])
+    }
+
     this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje)).subscribe(
       horario => {
         this.horarios = horario;
-        console.log('a')
-      }
+        for (let hr of this.horarios){
+            if(hr.diaSemana!=undefined){          
+                hr.diaSemana=DiaSemanaEnum[hr.diaSemana];
+
+            }
+        }
+    }
     )
   }
 
-  listarHorariosPorDia() {
-    this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje)).subscribe(
-      horario => {
-        this.horarios = horario;
-      }
-    ) 
+  dataHoje(){
+    let dia = this.hoje.getDate()<10 ? "0"+this.hoje.getDate() : this.hoje.getDate();
+    let mes = MesEnum[this.hoje.getMonth()];
+    this.dataHojeFormatada = `${dia} de ${mes}, ${this.hoje.getFullYear()}`
   }
 }
