@@ -4,5 +4,5 @@ export class ClienteCadastrarDTO {
     usuario?: string;
     senha?: string;
     telefone?: string;
-    idEmpresa = [1]
+    idEmpresa = []
 }

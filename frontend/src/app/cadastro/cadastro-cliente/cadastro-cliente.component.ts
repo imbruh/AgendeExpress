@@ -38,31 +38,37 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   cadastrarCliente (): void{
-    // if (this.cliente.id) {
-    //   this.clienteService.atualizar(this.cliente).subscribe(
-    //     alunoAlterado => {
-    //       console.log(alunoAlterado);
-    //       this.roteador.navigate(['listagem-aluno']);
-    //     }
-    //   )
-    // }else {
-    console.log(this.cliente)
-    if(this.cliente.nome==undefined || this.cliente.email==undefined || this.cliente.senha==undefined || this.cliente.telefone==undefined) {
-      this.mensagemService.snackAviso('Preencha todos os campos!');
+    if(this.cliente.nome==undefined || this.cliente.email==undefined || this.cliente.senha==undefined) {
+      this.mensagemService.snackAviso('Preencha todos os campos');
+    }
+    else{
+      let todasEmpresas: any = [];
+      this.empresaService.listar().subscribe(
+        empresa => {
+          todasEmpresas = empresa
+        }
+      )
+      let empresaTemp : any = [];
+      for(let empresa of todasEmpresas) {
+        empresaTemp.push(empresa.id);
+      }
 
-  }else{
+      this.cliente.idEmpresa = empresaTemp;
+
       this.clienteService.cadastrarCliente(this.cliente).subscribe(
         clienteCadastrado =>  {
-          if(clienteCadastrado.id != undefined){
-            localStorage.setItem("cliente",clienteCadastrado.id.toString());
-            this.roteador.navigate(['inicio'])
-            this.mensagemService.snackSucesso('Cliente Cadastrado')
+          if(clienteCadastrado!=undefined){
+            if(clienteCadastrado.id != undefined){
+              localStorage.setItem("cliente",clienteCadastrado.id.toString());
+              this.roteador.navigate(['inicio'])
+            }
           }
           else{
-            //snackbar
             this.cliente = new ClienteCadastrarDTO();
+            this.mensagemService.snackErro('Credenciais ja usadas no sistema')
           }
         }
+
       );
     }
 
@@ -70,7 +76,8 @@ export class CadastroClienteComponent implements OnInit {
 
   atualizarCliente(){
     this.clienteService.atualizar(this.clienteAtualizar).subscribe(()=>{
-      //atualizar "session"
+      this.mensagemService.snackSucesso('Cliente Atualizado')
+      this.roteador.navigate(['inicio'])
     })
   }
 

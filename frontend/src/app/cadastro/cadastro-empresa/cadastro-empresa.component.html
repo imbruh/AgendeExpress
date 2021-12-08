@@ -18,7 +18,7 @@
             </div>
 
             <div class="col-md-12">
-              <input *ngIf="empresaAtualizar.id==undefined" [(ngModel)]="empresa.cnpj" [ngModelOptions]="{standalone: true}" class="form-control" type="email" name="email" placeholder="CNPJ" required>
+              <input *ngIf="empresaAtualizar.id==undefined" [(ngModel)]="empresa.cnpj" [ngModelOptions]="{standalone: true}" class="form-control" type="text" name="cnpj" placeholder="CNPJ" required>
               <div class="valid-feedback">CNPJ válido</div>
               <div class="invalid-feedback">CNPJ o campo não pode ficar em branco!</div>
             </div>
@@ -30,7 +30,7 @@
               <div class="invalid-feedback">Password o campo não pode ficar em branco!</div>
             </div>
             <div class="form-button mt-3" style="text-align: center">
-              <button *ngIf="empresaAtualizar.id!=undefined" id="submit" type="submit" class="btn btn-primary" (click)="cadastrarEmpresa()">Atualizar</button>
+              <button *ngIf="empresaAtualizar.id!=undefined" id="submit" type="submit" class="btn btn-primary" (click)="atualizarEmpresa()">Atualizar</button>
               <button *ngIf="empresaAtualizar.id==undefined" id="submit" type="submit" class="btn btn-primary" (click)="cadastrarEmpresa()">Cadastrar</button>
             </div>
           </form>

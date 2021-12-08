@@ -52,7 +52,7 @@ export class MenuComponent implements OnInit {
             // return this.clienteService;
           })
     }else{
-        this.roteador.navigate(['cadastro-empresa', 1]).then(_r => {
+        this.roteador.navigate(['cadastro-empresa', this.empresa.id]).then(_r => {
             // return this.clienteService;
           })
     }

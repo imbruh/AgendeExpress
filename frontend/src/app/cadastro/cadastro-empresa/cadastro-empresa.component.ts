@@ -42,35 +42,32 @@ export class CadastroEmpresaComponent implements OnInit {
   }
 
   cadastrarEmpresa (): void{
-    // if (this.empresa.id) {
-    //   this.empresaService.atualizar(this.empresa).subscribe(
-    //     empresaAlterado => {
-    //       console.log(empresaAlterado);
-    //       this.roteador.navigate(['listagem-empresa']);
-    //     }
-    //   )
-    // }else {
+    console.log(this.empresa)
     if(this.empresa.nome==undefined || this.empresa.cnpj==undefined || this.empresa.senha==undefined) {
-      this.mensagemService.snackAviso('Preencha todos os campos!');}
+      this.mensagemService.snackAviso('Preencha todos os campos');
+    }
     else{
       this.empresaService.cadastrarEmpresa(this.empresa).subscribe(
-        empresaCadastrado =>  {
-          console.log(empresaCadastrado)
-          this.roteador.navigate(['inicio'])
-          this.mensagemService.snackSucesso("Empresa Cadastrada♥")
+        empresaCadastrada =>  {
+          if(empresaCadastrada!=undefined){
+            if(empresaCadastrada.id != undefined){
+              localStorage.setItem("empresa",empresaCadastrada.id.toString());
+              this.roteador.navigate(['inicio'])
+            }
+          }
+          else{
+            this.empresa = new Empresa();
+            this.mensagemService.snackErro('Credenciais ja usadas no sistema')
+          }
         }
       );
-
-      this.empresa = new Empresa();
-      // }
-
     }
-    }
-
+  }
 
   atualizarEmpresa(){
     this.empresaService.atualizar(this.empresaAtualizar).subscribe(()=>{
-        //atualizar "session"
+      this.mensagemService.snackSucesso('Empresa Atualizada')
+      this.roteador.navigate(['inicio'])
     })
 }
 

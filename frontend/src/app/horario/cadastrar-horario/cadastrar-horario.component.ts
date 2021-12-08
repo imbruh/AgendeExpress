@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HorarioService } from 'src/app/shared/services/horario.service';
 import { HorarioCadastrarDTO } from 'src/app/shared/model/horarioCadastrarDTO';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import {MensagemService} from "../../shared/services/mensagem.service";
 import {HorarioDTO} from "../../shared/model/horarioDTO";
-=======
 import { Cliente } from 'src/app/shared/model/cliente';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
->>>>>>> 8a47d79ae9ca98aeb89000255eb2ffee83973b0a
 
 @Component({
   selector: 'app-cadastrar-horario',
@@ -22,11 +19,7 @@ export class CadastrarHorarioComponent implements OnInit {
   hora = '';
   cliente = new Cliente()
 
-<<<<<<< HEAD
-  constructor(private horarioService: HorarioService, private roteador: Router, private mensagemService: MensagemService) { }
-=======
-  constructor(private horarioService: HorarioService,private clienteService: ClienteService, private roteador: Router) { }
->>>>>>> 8a47d79ae9ca98aeb89000255eb2ffee83973b0a
+  constructor(private horarioService: HorarioService, private clienteService: ClienteService, private roteador: Router, private mensagemService: MensagemService) { }
 
   ngOnInit() {
     this.listarHorariosDisponiveis();
@@ -58,27 +51,6 @@ export class CadastrarHorarioComponent implements OnInit {
   }
 
   cadastrar() {
-<<<<<<< HEAD
-
-      let dataFormatada = this.horarioService.formatarDataHora(this.data);
-      let dataHora = dataFormatada.slice(0,11)
-      console.log(this.hora)
-      console.log(parseInt(this.hora) < 10)
-      dataHora += parseInt(this.hora) < 10 ? '0' + parseInt(this.hora.slice(0,2)): parseInt(this.hora.slice(0,2));
-      dataHora += ':00:00';
-      // console.log(dataHora)
-      let horarioDTO = new HorarioCadastrarDTO();
-      horarioDTO.dataHora = dataHora;
-      horarioDTO.idCliente = 3;
-
-      this.horarioService.cadastrarHorario(horarioDTO).subscribe(
-        horario => {
-          // this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(new Date))
-          location.reload()
-        }
-      );
-    }
-=======
     let dataFormatada = this.horarioService.formatarDataHora(this.data);
     let dataHora = dataFormatada.slice(0,11) 
     console.log(this.hora)
@@ -96,7 +68,6 @@ export class CadastrarHorarioComponent implements OnInit {
         location.reload()
       }
     );
->>>>>>> 8a47d79ae9ca98aeb89000255eb2ffee83973b0a
   }
-
+}
 
