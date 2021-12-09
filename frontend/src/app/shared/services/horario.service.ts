@@ -32,12 +32,12 @@ constructor(private httpClient: HttpClient) { }
     return horasFormatadas;
   }
 
-  listarHorarioPorDia(data: String): Observable<HorarioDTO[]>{
-    return this.httpClient.get<HorarioDTO[]>(`${this.URL_HORARIO}/listar?dataHora=${data}`);
+  listarHorarioPorDia(data: String, idEmpresa: number): Observable<HorarioDTO[]>{
+    return this.httpClient.get<HorarioDTO[]>(`${this.URL_HORARIO}/listar?dataHora=${data}&idEmpresa=${idEmpresa}`);
   }
 
-  filtrarHorarioDisponivel(data: string): Observable<string[]>{
-    return this.httpClient.get<string[]>(`${this.URL_HORARIO}/filtrar-horario?data=${data}`);
+  filtrarHorarioDisponivel(data: string, idEmpresa: number): Observable<string[]>{
+    return this.httpClient.get<string[]>(`${this.URL_HORARIO}/filtrar-horario?data=${data}&idEmpresa=${idEmpresa}`);
   }
 
   cadastrarHorario(horarioCadastrarDTO: HorarioCadastrarDTO): Observable<void>{

@@ -40,6 +40,7 @@ export class ListarHorarioComponent implements OnInit {
     this.dataHoje();
     // this.listarHorariosPorDia();
     let clienteLogadoId = localStorage.getItem("cliente");
+    let empresaId = localStorage.getItem("empresa");
     let empresaLogadaId = localStorage.getItem("empresaLogada");
     if (clienteLogadoId != undefined && clienteLogadoId != "0"){
         this.clienteService.pesquisarPorID(parseInt(clienteLogadoId)).subscribe(
@@ -59,17 +60,38 @@ export class ListarHorarioComponent implements OnInit {
         this.roteador.navigate([""])
     }
 
-    this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje)).subscribe(
-      horario => {
-        this.horarios = horario;
-        for (let hr of this.horarios){
-            if(hr.diaSemana!=undefined){          
-                hr.diaSemana=DiaSemanaEnum[hr.diaSemana];
+    if(clienteLogadoId != undefined && clienteLogadoId != "0"){
+      if(empresaId != undefined){
+        this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje), parseInt(empresaId)).subscribe(
+          horario => {
+            console.log(horario)
+            this.horarios = horario;
+            for (let hr of this.horarios){
+                if(hr.diaSemana!=undefined){          
+                    hr.diaSemana=DiaSemanaEnum[hr.diaSemana];
 
+                }
             }
         }
+        )
+      }
     }
-    )
+    else if(empresaLogadaId != undefined && empresaLogadaId != "0") {
+      if(empresaLogadaId != undefined){
+        this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.hoje), parseInt(empresaLogadaId)).subscribe(
+          horario => {
+            console.log(horario)
+            this.horarios = horario;
+            for (let hr of this.horarios){
+                if(hr.diaSemana!=undefined){          
+                    hr.diaSemana=DiaSemanaEnum[hr.diaSemana];
+
+                }
+            }
+        }
+        )
+      }
+    }
   }
 
   dataHoje(){

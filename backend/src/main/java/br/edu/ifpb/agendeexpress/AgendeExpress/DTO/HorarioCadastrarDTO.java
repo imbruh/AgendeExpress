@@ -10,4 +10,6 @@ public class HorarioCadastrarDTO {
 	
 	private Long idCliente;
 	
+	private Long idEmpresa;
+	
 }

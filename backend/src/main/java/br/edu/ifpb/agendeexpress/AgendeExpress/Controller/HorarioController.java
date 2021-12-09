@@ -3,6 +3,8 @@ package br.edu.ifpb.agendeexpress.AgendeExpress.Controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,12 +33,12 @@ public class HorarioController {
 	}
 	
 	@GetMapping("/listar")
-	public List<HorarioListarDTO> listar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora){
-		return this.horarioService.listar(dataHora);
+	public List<HorarioListarDTO> listar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora, @RequestParam @NotNull Long idEmpresa){
+		return this.horarioService.listar(dataHora, idEmpresa);
 	}
 	
 	@GetMapping("/filtrar-horario")
-	public List<String> filtrar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime data){
-		return this.horarioService.filtrar(data);
+	public List<String> filtrar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime data, @RequestParam @NotNull Long idEmpresa){
+		return this.horarioService.filtrar(data, idEmpresa);
 	}
 }

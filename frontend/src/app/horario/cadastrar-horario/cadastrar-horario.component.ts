@@ -36,14 +36,16 @@ export class CadastrarHorarioComponent implements OnInit {
     }
 
   listarHorariosDisponiveis() {
-    console.log(this.data)
-    this.horarioService.filtrarHorarioDisponivel(this.horarioService.formatarDataHora(this.data)).subscribe(
+    let empresaLogadaId = localStorage.getItem("empresa");
+    if(empresaLogadaId != undefined){
+      console.log(this.data)
+    this.horarioService.filtrarHorarioDisponivel(this.horarioService.formatarDataHora(this.data), parseInt(empresaLogadaId)).subscribe(
       horarios => {
         this.horariosDisponiveis = this.horarioService.formatarHora(horarios),
         console.log(this.horariosDisponiveis)
       }
     );
-
+    }
   }
 
   alterarHora(hora: any) {
@@ -61,11 +63,14 @@ export class CadastrarHorarioComponent implements OnInit {
     let horarioDTO = new HorarioCadastrarDTO();
     horarioDTO.dataHora = dataHora;
     horarioDTO.idCliente = this.cliente.id;
-
+    let empresaLogada = localStorage.getItem("empresa");
+    if(empresaLogada != undefined){
+      horarioDTO.idEmpresa = parseInt(empresaLogada);
+    }
+   
     this.horarioService.cadastrarHorario(horarioDTO).subscribe(
       horario => {
-        // this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(new Date))
-        location.reload()
+          location.reload()     
       }
     );
   }

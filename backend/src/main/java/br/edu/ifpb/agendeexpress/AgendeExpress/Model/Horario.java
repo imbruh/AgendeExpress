@@ -36,4 +36,8 @@ public class Horario {
 	@NotNull
 	private Cliente cliente;
 	
+	@ManyToOne
+	@JoinColumn(name="empresa_id")
+	@NotNull
+	private Empresa empresa;
 }

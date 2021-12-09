@@ -23,6 +23,10 @@ export class MenuComponent implements OnInit {
     if (clienteLogadoId != undefined && clienteLogadoId != "0" && empresaId != undefined && empresaId != "0"){
         this.clienteService.pesquisarPorID(parseInt(clienteLogadoId)).subscribe(
             cliente =>{
+                if(cliente == undefined){
+                    localStorage.setItem("cliente", "0");
+                    // this.roteador.navigate([""])
+                }
                 this.cliente=cliente;
             }
         )
@@ -35,6 +39,10 @@ export class MenuComponent implements OnInit {
     }else if (empresaLogadaId != undefined && empresaLogadaId != "0"){
         this.empresaService.pesquisarPorID(parseInt(empresaLogadaId)).subscribe(
             empresa =>{
+                if(empresa == undefined){
+                    localStorage.setItem("empresaLogada", "0");
+                    // this.roteador.navigate([""])
+                }
                 this.empresa=empresa
             }
         )
@@ -46,38 +54,44 @@ export class MenuComponent implements OnInit {
 
   
   editar(){
-    // this.cliente.id=3;
     if(this.cliente.id!=undefined){
         this.roteador.navigate(['cadastro-cliente', this.cliente.id]).then(_r => {
-            // return this.clienteService;
           })
-    }else{
+    }
+    else{
         this.roteador.navigate(['cadastro-empresa', this.empresa.id]).then(_r => {
-            // return this.clienteService;
           })
     }
 }
 
   apagarConta(){
-    this.logado = new Empresa();
-    if (this.logado instanceof Cliente){
-        this.clienteService.apagarConta(3).subscribe(
-            ()=>{
-              
-            }
-        )
-    }
+    let clienteLogado = localStorage.getItem("cliente")
+    let empresaLogada = localStorage.getItem("empresaLogada")
+    if(clienteLogado != undefined && clienteLogado!="0"){
+      this.clienteService.apagarConta(parseInt(clienteLogado)).subscribe(
+          contaApagada=>{
+            if(contaApagada)
+              this.logout()
+          }
+      )
+    }    
     else{
-        this.empresaService.remover(1).subscribe(
-            ()=>{
-            }
+      if(empresaLogada != undefined && empresaLogada!="0"){
+        this.empresaService.remover(parseInt(empresaLogada)).subscribe(
+          contaApagada=>{
+            if(contaApagada)
+              this.logout()
+          }
         )
     }
+  }
+
 }
-    logout(){
-        localStorage.setItem("cliente","0")
-        localStorage.setItem("empresa","0")
-        this.roteador.navigate([""])
-    }
+  logout(){
+    localStorage.setItem("cliente","0")
+    localStorage.setItem("empresa","0")
+    localStorage.setItem("empresaLogada","0")
+    this.roteador.navigate([""])
+  }
 
 }

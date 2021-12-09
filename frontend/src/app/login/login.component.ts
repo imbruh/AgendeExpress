@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem("cliente",cliente.id.toString())
                 localStorage.setItem("empresa",this.cliente.idEmpresa.toString())
                 this.router.navigate(['inicio']);
-                this.mensagemService.snackSucesso("Login Efetuado")
               }
             }
             else {

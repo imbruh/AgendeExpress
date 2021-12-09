@@ -1,6 +1,7 @@
 package br.edu.ifpb.agendeexpress.AgendeExpress.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Service;
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.HorarioCadastrarDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.DTO.HorarioListarDTO;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Cliente;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Empresa;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Model.Horario;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.ClienteRepository;
+import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.EmpresaRepository;
 import br.edu.ifpb.agendeexpress.AgendeExpress.Repository.HorarioRepository;
 
 @Service
@@ -24,24 +27,24 @@ public class HorarioService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private EmpresaRepository empresaRepository;
+	
 	public void cadastrar(HorarioCadastrarDTO horario) {
 		Horario horarioExistente = horarioRepository.findByDatahora(horario.getDataHora());
 		Optional<Cliente> cliente = clienteRepository.findById(horario.getIdCliente());
-//		if (horarioExistente != null) {
-//			return null;
-//		}
-		
+		Optional<Empresa> empresa = empresaRepository.findById(horario.getIdEmpresa());
+	
 		horarioRepository.save(Horario.builder()
 				.datahora(horario.getDataHora())
 				.cliente(cliente.get())
+				.empresa(empresa.get())
 				.build());
-		
-//		return "Horário marcado com sucesso";
-		
+				
 	}
 	
-	public List<HorarioListarDTO> listar(LocalDateTime dataHora){
-		List<Horario> horarios = horarioRepository.listarPorDia(dataHora);
+	public List<HorarioListarDTO> listar(LocalDateTime dataHora, Long idEmpresa){
+		List<Horario> horarios = horarioRepository.listarPorDia(dataHora, idEmpresa);
 		List<HorarioListarDTO> horariosDTO = new ArrayList<>();
 		
 		for(Horario hr : horarios) {
@@ -60,8 +63,10 @@ public class HorarioService {
 
 	}
 
-	public List<String> filtrar(LocalDateTime data) {
-		List<Horario> horarios = this.horarioRepository.listarPorDia(data);
+	public List<String> filtrar(LocalDateTime data , Long idEmpresa) {
+		LocalDateTime horaHoje = LocalDateTime.now();
+		
+		List<Horario> horarios = this.horarioRepository.listarPorDia(data, idEmpresa);
 		
 		List<String> horariosMarcados = new ArrayList<>();
 		for(Horario h: horarios){
@@ -69,13 +74,23 @@ public class HorarioService {
 		}
 		
 		List<String> horas = new ArrayList<>();
-		for(int i = 8; i < 18; i++) {
-			if(!horariosMarcados.contains(Integer.toString(i))){
-				horas.add(Integer.toString(i));
+		System.out.println(data.toLocalDate());
+		System.out.println(horaHoje.toLocalDate());
+		if(data.toLocalDate().equals(horaHoje.toLocalDate())) {
+			for(int i = 8; i < 18; i++) {
+				if(!horariosMarcados.contains(Integer.toString(i))){
+					if(i > horaHoje.getHour())
+						horas.add(Integer.toString(i));	
+				}
 			}
 		}
-		
+		else {
+			for(int i = 8; i < 18; i++) {
+				if(!horariosMarcados.contains(Integer.toString(i))){
+					horas.add(Integer.toString(i));	
+				}
+			}
+		}
 		return horas;
 	}
-	
 }
