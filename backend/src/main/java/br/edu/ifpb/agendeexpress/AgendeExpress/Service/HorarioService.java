@@ -93,4 +93,15 @@ public class HorarioService {
 		}
 		return horas;
 	}
+
+	public Boolean apagar(LocalDateTime dataHora, Long idCliente, Long idEmpresa){
+		Optional<Cliente> cliente = this.clienteRepository.findById(idCliente);
+		Optional<Empresa> empresa = this.empresaRepository.findById(idEmpresa);
+		Horario horario = this.horarioRepository.findByDatahoraAndClienteAndEmpresa(dataHora, cliente.get(), empresa.get());
+		if (horario == null) {
+			return false;
+		}
+		this.horarioRepository.delete(horario);
+		return true;
+	}
 }

@@ -7,7 +7,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,5 +43,10 @@ public class HorarioController {
 	@GetMapping("/filtrar-horario")
 	public List<String> filtrar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime data, @RequestParam @NotNull Long idEmpresa){
 		return this.horarioService.filtrar(data, idEmpresa);
+	}
+	
+	@DeleteMapping("/apagar-horario")
+	public ResponseEntity<Boolean> apagarHorario(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora, @RequestParam Long idCliente, @RequestParam Long idEmpresa ) {
+		return ResponseEntity.ok(this.horarioService.apagar(dataHora, idCliente, idEmpresa));
 	}
 }

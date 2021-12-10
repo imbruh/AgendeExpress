@@ -20,4 +20,6 @@ public interface HorarioRepository extends JpaRepository<Horario, Long>{
 	List<Horario> listarPorDia(LocalDateTime dia, Long idEmpresa);
 
 	List<Horario> findByCliente(Cliente cliente);
+	
+	Horario findByDatahoraAndClienteAndEmpresa(LocalDateTime dataHora, Cliente idCliente, Empresa idEmpresa);
 }
