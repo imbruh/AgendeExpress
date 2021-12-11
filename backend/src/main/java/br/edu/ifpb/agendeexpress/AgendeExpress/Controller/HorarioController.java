@@ -45,8 +45,13 @@ public class HorarioController {
 		return this.horarioService.filtrar(data, idEmpresa);
 	}
 	
+	@GetMapping("/buscar-horario-por-cliente")
+	public List<HorarioListarDTO> buscarHorarioPorCliente(@RequestParam @NotNull Long idCliente, @RequestParam @NotNull Long idEmpresa){
+		return this.horarioService.buscarHorarioPorCliente(idCliente, idEmpresa);
+	}
+	
 	@DeleteMapping("/apagar-horario")
-	public ResponseEntity<Boolean> apagarHorario(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora, @RequestParam Long idCliente, @RequestParam Long idEmpresa ) {
-		return ResponseEntity.ok(this.horarioService.apagar(dataHora, idCliente, idEmpresa));
+	public List<HorarioListarDTO> apagarHorario(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataHora, @RequestParam Long idCliente, @RequestParam Long idEmpresa ) {
+		return this.horarioService.apagar(dataHora, idCliente, idEmpresa);
 	}
 }

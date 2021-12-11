@@ -55,11 +55,9 @@ export class CadastrarHorarioComponent implements OnInit {
   cadastrar() {
     let dataFormatada = this.horarioService.formatarDataHora(this.data);
     let dataHora = dataFormatada.slice(0,11) 
-    console.log(this.hora)
-    console.log(parseInt(this.hora) < 10)
+
     dataHora += parseInt(this.hora) < 10 ? '0' + parseInt(this.hora.slice(0,2)): parseInt(this.hora.slice(0,2));
     dataHora += ':00:00';
-    // console.log(dataHora)
     let horarioDTO = new HorarioCadastrarDTO();
     horarioDTO.dataHora = dataHora;
     horarioDTO.idCliente = this.cliente.id;

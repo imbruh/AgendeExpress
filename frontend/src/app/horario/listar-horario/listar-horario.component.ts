@@ -21,9 +21,10 @@ export class ListarHorarioComponent implements OnInit {
   empresa = new Empresa();
   hoje = new Date();
   horarios: Array<HorarioDTO> = [];
-  logado:any;
+  logado: any;
   dataHojeFormatada = "";
   clienteLogado=true;
+  data: any;
 
   constructor(private clienteService: ClienteService, private empresaService: EmpresaService, public dialog: MatDialog, private dialogService: DialogService, private horarioService: HorarioService, public dialogRef: MatDialogRef<DialogService>, private roteador: Router) {}
 
@@ -98,5 +99,24 @@ export class ListarHorarioComponent implements OnInit {
     let dia = this.hoje.getDate()<10 ? "0"+this.hoje.getDate() : this.hoje.getDate();
     let mes = MesEnum[this.hoje.getMonth()];
     this.dataHojeFormatada = `${dia} de ${mes}, ${this.hoje.getFullYear()}`
+  }
+
+  listarHorarioPorDia() {
+    let empresaId = localStorage.getItem("empresa");
+    if(empresaId != undefined)
+      this.horarioService.listarHorarioPorDia(this.horarioService.formatarDataHora(this.data), parseInt(empresaId)).subscribe(
+        horario => {
+          this.horarios = horario;
+          for (let hr of this.horarios){
+            if(hr.diaSemana!=undefined){          
+                hr.diaSemana=DiaSemanaEnum[hr.diaSemana];
+            }
+          }
+        }
+      )
+  }
+
+  openDialogCancelarHorario() {
+    this.dialogService.openDialogCancelarHorario();
   }
 }

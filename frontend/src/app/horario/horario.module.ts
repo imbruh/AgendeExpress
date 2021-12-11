@@ -16,15 +16,18 @@ import { DialogBatePapoComponent } from './dialog-bate-papo/dialog-bate-papo.com
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from "@angular/forms";
 import { LayoutsModule } from '../layouts/layouts.module';
+import { CancelarHorarioComponent } from './cancelar-horario/cancelar-horario.component';
 
 @NgModule({
     declarations: [
         ListarHorarioComponent,
         CadastrarHorarioComponent,
+        CancelarHorarioComponent,
         DialogBatePapoComponent,
     ],
     exports: [
-        ListarHorarioComponent
+        ListarHorarioComponent,
+        CancelarHorarioComponent
     ],
     imports: [
         CommonModule,
